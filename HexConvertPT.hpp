@@ -1,54 +1,54 @@
 template <>
-struct HexConvert<eHexGridType::PointyTopped>
+struct HexConvert<eHexGridShape::PointyTopped>
 {
-    template <class T>
-    static HexIndex<T> ToHex(const T& x, const T& y, float radius)
+    template <class TIn, class TOut = TIn>
+    static HexIndex_t<TOut> ToHex(const HexPixel_t<TIn>& p, TIn radius)
     {
-        T q = x * std::sqrt(3.0f) / 3.0f - y / 3.0f;
-        T r = ((y * 2.0f) / 3.0f) / radius;
-        return HexIndex(q, r);
+        TOut q = p.x * std::sqrt(3.0f) / 3.0f - p.y / 3.0f;
+        TOut r = ((p.y * 2.0f) / 3.0f) / radius;
+        return HexIndex_t<TOut>(q, r);
     }
 
-    template <class FROM, class TO = FROM>
-    static HexIndex<TO> ToHex(const HexCubeIndex<FROM>& cube)
+    template <class TIn, class TOut = TIn>
+    static HexIndex_t<TOut> ToHex(const HexCubeIndex_t<TIn>& cube)
     {
-        return HexIndex<TO>(cube.x, cube.z);
+        return HexIndex_t<TOut>(cube.x, cube.z);
     }
 
-    template <class FROM, class TO = FROM>
-    static HexCubeIndex<TO> ToCube(const HexIndex<FROM>& hex)
+    template <class TIn, class TOut = TIn>
+    static HexCubeIndex_t<TOut> ToCube(const HexIndex_t<TIn>& hex)
     {
-        TO x = hex.q;
-        TO z = hex.r;
-        TO y = -x - z;
-        return HexCubeIndex<TO>(x, y, z);
+        TOut x = hex.q;
+        TOut z = hex.r;
+        TOut y = -x - z;
+        return HexCubeIndex_t<TOut>(x, y, z);
     }
 
-    template <class PIXEL, class T>
-    static PIXEL ToPixel(const HexIndex<T>& hex, float radius)
+    template <class TIn, class TOut = TIn>
+    static HexPixel_t<TOut> ToPixel(const HexIndex_t<TIn>& hex, TIn radius)
     {
-        PIXEL pixel;
-        pixel.x = radius * std::sqrt(3.0f) * (hex.q + hex.r * 0.5f);
-        pixel.y = radius * 1.5f * hex.r;
-        return pixel;
+        TOut x = radius * std::sqrt(3.0f) * (hex.q + hex.r * 0.5f);
+        TOut y = radius * 1.5f * hex.r;
+        return HexPixel_t<TOut>(x, y);
     }
 
-    template <class PIXEL, class T>
-    static PIXEL ToPixel(const HexCubeIndex<T>& cube, float radius)
+    template <class TIn, class TOut = TIn>
+    static HexPixel_t<TOut> ToPixel(const HexCubeIndex_t<TIn>& cube, TIn radius)
     {
-        HexIndex<T> hex(cube);
-        return ToPixel<T, PIXEL>(hex, radius);
+        HexIndex_t<TIn> hex(cube);
+        return ToPixel<TOut>(hex, radius);
     }
 
-    static HexCubeIndexI Round(const HexCubeIndexF& rhs)
+    template <class TIn, class TOut>
+    static HexCubeIndex_t<TOut> Round(const HexCubeIndex_t<TIn>& rhs)
     {
-        int rx = static_cast<int>(std::round(rhs.x));
-        int ry = static_cast<int>(std::round(rhs.y));
-        int rz = static_cast<int>(std::round(rhs.z));
+        TOut rx = static_cast<TOut>(std::round(rhs.x));
+        TOut ry = static_cast<TOut>(std::round(rhs.y));
+        TOut rz = static_cast<TOut>(std::round(rhs.z));
 
-        float dx = std::abs(rx - rhs.x);
-        float dy = std::abs(ry - rhs.y);
-        float dz = std::abs(rz - rhs.z);
+        auto dx = std::abs(rx - rhs.x);
+        auto dy = std::abs(ry - rhs.y);
+        auto dz = std::abs(rz - rhs.z);
 
         if (dy < dx && dz < dx)
             rx = -ry - rz;
@@ -57,15 +57,16 @@ struct HexConvert<eHexGridType::PointyTopped>
         else
             rz = -rx - ry;
 
-        return HexCubeIndexI(rx, ry, rz);
+        return HexCubeIndex_t<TOut>(rx, ry, rz);
     }
 
-    static HexIndexI Round(const HexIndexF& rhs)
+    template <class TIn, class TOut>
+    static HexIndex_t<TOut> Round(const HexIndex_t<TIn>& rhs)
     {
-        HexCubeIndexF cubef = ToCube(rhs);
-        HexCubeIndexI cubei = Round(cubef);
-        return ToHex<int, int>(cubei);
+        auto cube = ToCube(rhs);
+        auto cuber = Round<TIn, TOut>(cube);
+        return ToHex(cuber);
     }
 };
 
-typedef HexConvert<eHexGridType::PointyTopped> HexConvertPT;
+typedef HexConvert<eHexGridShape::PointyTopped> HexConvertPT;

@@ -92,56 +92,39 @@ HCURSOR CHexViewerDlg::OnQueryDragIcon()
 
 void CHexViewerDlg::DrawHexGrid()
 {
-    typedef HexGrid<HexIndexI, POINT, eHexGridType::PointyTopped> TGrid;
-
-    CClientDC dc(this);
-
     CRect rect;
     GetClientRect(&rect);
 
+    CClientDC dc(this);
     dc.FillSolidRect(&rect, RGB(0xFF, 0xFF, 0xFF));
 
-    float radius = 30.0f;
-    int countX = (int)std::ceil(rect.Width() / TGrid::GetHorizontalDistance(radius));
-    int countY = (int)std::ceil(rect.Height() / TGrid::GetVerticalDistance(radius));
+    typedef HexGrid_t<float, eHexGridShape::PointyTopped> TGrid;
+    HexGridManager<TGrid> manager;
+    manager.Create(rect.Width(), rect.Height(), 50.0f);
 
-    POINT offset;
-    offset.x = TGrid::GetWidth(radius) / 2;
-    offset.y = TGrid::GetHeight(radius) / 2;
-
-    for (int y = 0; y < countY; ++y)
+    manager.ForEach([&dc, &rect](const TGrid& grid) -> bool
     {
-        int startX = -((y + 1) / 2);
-        int endX = startX + countX;
-
-        CString buf;
-        buf.Format(L"Line %d : %d ~ %d\n", y, startX, endX - 1);
-        ::OutputDebugStringW((LPCWSTR)buf);
-
-        for (int x = startX; x < endX; ++x)
+        for (int i = 0; i < 6; ++i)
         {
-            TGrid grid(HexIndexI(x, y), radius);
+            HexPixelF start = grid.GetCorner(i);
+            HexPixelF end = grid.GetCorner((i + 1) % 6);
 
-            for (int i = 0; i < 6; ++i)
-            {
-                POINT start = grid.GetCorner(i);
-                POINT end = grid.GetCorner((i + 1) % 6);
-
-                dc.MoveTo(start.x + offset.x, rect.bottom - start.y - offset.y);
-                dc.LineTo(end.x + offset.x, rect.bottom - end.y - offset.y);
-            }
-
-            RECT textRect;
-            textRect.left = grid.center.x + offset.x;
-            textRect.top = rect.bottom - grid.center.y - offset.y;
-            textRect.right = textRect.left + 1;
-            textRect.bottom = textRect.right + 1;
-
-            CString text;
-            text.Format(L"%d,%d", x, y);
-            dc.DrawText(text, &textRect, DT_NOCLIP | DT_CENTER | DT_VCENTER);
+            dc.MoveTo(start.x, rect.bottom - start.y);
+            dc.LineTo(end.x, rect.bottom - end.y);
         }
-    }
+
+        RECT textRect;
+        textRect.left = grid.center.x + 10;
+        textRect.top = rect.bottom - grid.center.y - 20;
+        textRect.right = textRect.left + 1;
+        textRect.bottom = textRect.right + 1;
+
+        CString text;
+        text.Format(L"%d,%d", grid.index.q, grid.index.r);
+        dc.DrawText(text, &textRect, DT_NOCLIP | DT_CENTER | DT_VCENTER);
+
+        return true;
+    });
 }
 
 void CHexViewerDlg::OnSize(UINT nType, int cx, int cy)

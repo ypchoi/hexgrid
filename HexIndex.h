@@ -1,39 +1,39 @@
 #pragma once
 template <class T>
-struct HexCubeIndex;
+struct HexCubeIndex_t;
 
 template <class T>
-struct HexIndex
+struct HexIndex_t
 {
     const T q;
     const T r;
 
-    typedef T TType;
-    typedef std::array<HexIndex<T>, 6> TNeighbors;
+    typedef T ValueType;
+    typedef std::array<HexIndex_t<T>, 6> NeighborType;
 
-    HexIndex()
+    HexIndex_t()
         : q(T()), r(T())
     {
     }
 
-    HexIndex(const T& q_, const T& r_)
+    HexIndex_t(const T& q_, const T& r_)
         : q(q_), r(r_)
     {
     }
 
-    ~HexIndex()
+    ~HexIndex_t()
     {
     }
 
-    TNeighbors GetNeighbors() const
+    NeighborType GetNeighbors() const
     {
-        static const TNeighbors directions =
+        static const NeighborType directions =
         {
-            HexIndex(1, 0), HexIndex(1, -1), HexIndex(0, -1),
-            HexIndex(-1, 0), HexIndex(-1, 1), HexIndex(0, 1),
+            HexIndex_t(1, 0), HexIndex_t(1, -1), HexIndex_t(0, -1),
+            HexIndex_t(-1, 0), HexIndex_t(-1, 1), HexIndex_t(0, 1),
         };
 
-        TNeighbors neighbors =
+        NeighborType neighbors =
         {
             *this + directions[0], *this + directions[1], *this + directions[2],
             *this + directions[3], *this + directions[4], *this + directions[5],
@@ -42,11 +42,17 @@ struct HexIndex
         return neighbors;
     }
 
-    int GetCost(const HexIndex& rhs) const
+    int GetCost(const HexIndex_t& rhs) const
     {
         return (std::abs(q - rhs.q) + std::abs(q + r - rhs.q - rhs.r) + std::abs(r - rhs.r)) / 2;
     }
 };
 
-typedef HexIndex<int> HexIndexI;
-typedef HexIndex<float> HexIndexF;
+template <class T>
+HexIndex_t<T> operator+(const HexIndex_t<T>& lhs, const HexIndex_t<T>& rhs)
+{
+    return HexIndex_t<T>(lhs.q + rhs.q, lhs.r + rhs.r);
+}
+
+typedef HexIndex_t<int> HexIndexI;
+typedef HexIndex_t<float> HexIndexF;

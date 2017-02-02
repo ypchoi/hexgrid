@@ -1,15 +1,14 @@
 #pragma once
-
 // http://www.redblobgames.com/grids/hexagons/
 
-enum class eHexGridType
+enum class eHexGridShape
 {
     PointyTopped,
     FlatTopped,
 };
 
-template <class INDEX, class PIXEL, eHexGridType TYPE>
-struct HexGrid
+template <class T, eHexGridShape SHAPE>
+struct HexGrid_t
 {
 };
 

@@ -1,14 +1,27 @@
-template <class INDEX, class PIXEL>
-struct HexGrid<INDEX, PIXEL, eHexGridType::PointyTopped>
+template <class T>
+struct HexGrid_t<T, eHexGridShape::PointyTopped>
 {
-    const INDEX index;
-    const PIXEL center;
-    const float radius;
+    using Index = HexIndex_t<int>;
+    using Pixel = HexPixel_t<T>;
+    static const eHexGridShape Shape = eHexGridShape::PointyTopped;
 
-    HexGrid(const INDEX& index_, float radius_)
+    const Index index;
+    const Pixel center;
+    const T radius;
+
+    HexGrid_t()
+        : index({}), center({}), radius(T())
+    {
+    }
+
+    HexGrid_t(const Index& index_, T radius_)
         : index(index_)
-        , center(HexConvertPT::ToPixel<PIXEL, INDEX::TType>(index_, radius_))
+        , center(HexConvert<Shape>::ToPixel<Index::ValueType, T>(index_, radius_))
         , radius(radius_)
+    {
+    }
+
+    ~HexGrid_t()
     {
     }
 
@@ -22,19 +35,19 @@ struct HexGrid<INDEX, PIXEL, eHexGridType::PointyTopped>
         return GetHeight(radius);
     }
 
-    PIXEL GetDistance(const INDEX& other) const
+    template <class INDEX>
+    Pixel GetDistance(const INDEX& other) const
     {
-        PIXEL otherCenter = HexConvertPT::ToPixel<PIXEL, INDEX::TType>(other, radius_);
-        return PIXEL(otherCenter.x - center.x, otherCenter.y - center.y);
+        Pixel otherCenter = HexConvert<Shape>::ToPixel<PIXEL>(other, radius_);
+        return Pixel(otherCenter.x - center.x, otherCenter.y - center.y);
     }
 
-    PIXEL GetCorner(int i) const
+    Pixel GetCorner(int i) const
     {
-        PIXEL pixel;
         float radian = (60.0f * i + 30.0f) * (static_cast<float>(M_PI) / 180.0f);
-        pixel.x = center.x + radius * std::cos(radian);
-        pixel.y = center.y + radius * std::sin(radian);
-        return pixel;
+        float x = center.x + radius * std::cos(radian);
+        float y = center.y + radius * std::sin(radian);
+        return Pixel(x, y);
     }
 
     static float GetWidth(float radius)

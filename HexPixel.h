@@ -1,21 +1,27 @@
 #pragma once
 
-struct HexPixel
+template <class T>
+struct HexPixel_t
 {
-    float x;
-    float y;
+    typedef T ValueType;
 
-    HexPixel()
-        : x(0.0f), y(0.0f)
+    T x;
+    T y;
+
+    HexPixel_t()
+        : x(T()), y(T())
     {
     }
 
-    HexPixel(float x_, float y_)
+    HexPixel_t(const T& x_, const T& y_)
         : x(x_), y(y_)
     {
     }
 
-    ~HexPixel()
+    ~HexPixel_t()
     {
     }
 };
+
+typedef HexPixel_t<int> HexPixelI;
+typedef HexPixel_t<float> HexPixelF;

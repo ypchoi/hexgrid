@@ -1,5 +1,5 @@
 #pragma once
-template <eHexGridType TYPE>
+template <eHexGridShape TYPE>
 struct HexConvert
 {
 };

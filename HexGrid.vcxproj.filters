@@ -39,6 +39,9 @@
     <ClInclude Include="HexPixel.h">
       <Filter>HexGrid</Filter>
     </ClInclude>
+    <ClInclude Include="HexGridManager.h">
+      <Filter>HexGrid</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">

@@ -76,6 +76,7 @@
   <ItemGroup>
     <ClInclude Include="HexConvert.h" />
     <ClInclude Include="HexConvertPT.hpp" />
+    <ClInclude Include="HexGridManager.h" />
     <ClInclude Include="HexInclude.h" />
     <ClInclude Include="HexIndex.h" />
     <ClInclude Include="HexCubeIndex.h" />
