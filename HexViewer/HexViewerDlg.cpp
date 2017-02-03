@@ -7,8 +7,6 @@
 #include "HexViewerDlg.h"
 #include "afxdialogex.h"
 
-#include "HexInclude.h"
-
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
@@ -33,6 +31,7 @@ BEGIN_MESSAGE_MAP(CHexViewerDlg, CDialogEx)
 	ON_WM_PAINT()
 	ON_WM_QUERYDRAGICON()
     ON_WM_SIZE()
+    ON_WM_MOUSEMOVE()
 END_MESSAGE_MAP()
 
 
@@ -48,6 +47,7 @@ BOOL CHexViewerDlg::OnInitDialog()
 	SetIcon(m_hIcon, FALSE);		// Set small icon
 
 	// TODO: Add extra initialization here
+    CreateHexGrid();
 
 	return TRUE;  // return TRUE  unless you set the focus to a control
 }
@@ -90,32 +90,37 @@ HCURSOR CHexViewerDlg::OnQueryDragIcon()
 	return static_cast<HCURSOR>(m_hIcon);
 }
 
+void CHexViewerDlg::CreateHexGrid()
+{
+    GetClientRect(&m_rect);
+
+    const HexPixelF start(0, 0);
+    const HexPixelF end(m_rect.Width(), m_rect.Height());
+
+    m_manager.Create(start, end, 50);
+}
+
 void CHexViewerDlg::DrawHexGrid()
 {
-    CRect rect;
-    GetClientRect(&rect);
-
     CClientDC dc(this);
-    dc.FillSolidRect(&rect, RGB(0xFF, 0xFF, 0xFF));
+    dc.FillSolidRect(&m_rect, RGB(0xFF, 0xFF, 0xFF));
 
-    typedef HexGrid_t<float, eHexGridShape::PointyTopped> TGrid;
-    HexGridManager<TGrid> manager;
-    manager.Create(rect.Width(), rect.Height(), 50.0f);
+    const HexPixelF& start = m_manager.GetStart();
 
-    manager.ForEach([&dc, &rect](const TGrid& grid) -> bool
+    m_manager.ForEach([this, &dc, &start](const TGrid& grid) -> bool
     {
         for (int i = 0; i < 6; ++i)
         {
-            HexPixelF start = grid.GetCorner(i);
-            HexPixelF end = grid.GetCorner((i + 1) % 6);
+            HexPixelF from = grid.GetCorner(i);
+            HexPixelF to = grid.GetCorner((i + 1) % 6);
 
-            dc.MoveTo(start.x, rect.bottom - start.y);
-            dc.LineTo(end.x, rect.bottom - end.y);
+            dc.MoveTo(start.x + from.x, m_rect.bottom - from.y - start.y);
+            dc.LineTo(start.x + to.x, m_rect.bottom - to.y - start.y);
         }
 
         RECT textRect;
-        textRect.left = grid.center.x + 10;
-        textRect.top = rect.bottom - grid.center.y - 20;
+        textRect.left = start.x + grid.center.x + 10;
+        textRect.top = m_rect.bottom - grid.center.y - start.y - 20;
         textRect.right = textRect.left + 1;
         textRect.bottom = textRect.right + 1;
 
@@ -129,6 +134,10 @@ void CHexViewerDlg::DrawHexGrid()
 
 void CHexViewerDlg::OnSize(UINT nType, int cx, int cy)
 {
+    CreateHexGrid();
     Invalidate(TRUE);
 }
 
+void CHexViewerDlg::OnMouseMove(UINT nFlags, CPoint point)
+{
+}

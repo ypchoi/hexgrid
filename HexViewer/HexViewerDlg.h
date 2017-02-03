@@ -3,7 +3,7 @@
 //
 
 #pragma once
-
+#include "HexInclude.h"
 
 // CHexViewerDlg dialog
 class CHexViewerDlg : public CDialogEx
@@ -27,9 +27,16 @@ protected:
 	virtual BOOL OnInitDialog();
 	afx_msg void OnPaint();
 	afx_msg void OnSize(UINT nType, int cx, int cy);
+    afx_msg void OnMouseMove(UINT nFlags, CPoint point);
 	afx_msg HCURSOR OnQueryDragIcon();
 	DECLARE_MESSAGE_MAP()
 
 private:
+    void CreateHexGrid();
     void DrawHexGrid();
+
+private:
+    typedef HexGrid_t<float, eHexGridShape::PointyTopped> TGrid;
+    HexGridManager<TGrid> m_manager;
+    CRect m_rect;
 };

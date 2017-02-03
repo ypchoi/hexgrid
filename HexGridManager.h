@@ -1,8 +1,12 @@
 #pragma once
 
-template <class GRID>
+template <class TGrid>
 class HexGridManager
 {
+    typedef unsigned __int32 uint32;
+    typedef typename TGrid::Pixel Pixel;
+    typedef typename TGrid::Pixel::ValueType T;
+
 public:
     HexGridManager()
         : m_countX(0), m_countY(0)
@@ -13,16 +17,29 @@ public:
     {
     }
 
-    using uint32 = unsigned __int32;
-
-    bool Create(float totalWidth, float totalHeight, float radius)
+    bool Create(const Pixel& start, const Pixel& end, T radius)
     {
         Release();
 
-        uint32 countX = (uint32)std::ceil(totalWidth / GRID::GetHorizontalDistance(radius));
-        uint32 countY = (uint32)std::ceil(totalHeight / GRID::GetVerticalDistance(radius));
+        if (end.x <= start.x || end.y <= start.y)
+            return false;
 
-        m_pGrids.reset(new GRID[countX * countY]);
+        m_start = start;
+        m_end = end;
+
+        T totalWidth = end.x - start.x;
+        T totalHeight = end.y - start.y;
+
+        T gridWidth = TGrid::GetWidth(radius);
+        T gridHeight = TGrid::GetHeight(radius);
+
+        T gridDistanceH = TGrid::GetHorizontalDistance(radius);
+        T gridDistanceV = TGrid::GetVerticalDistance(radius);
+
+        uint32 countX = (uint32)std::ceil((totalWidth + gridWidth * 0.5f) / gridDistanceH);
+        uint32 countY = (uint32)std::ceil((totalHeight + gridWidth * 0.5f) / gridDistanceV);
+
+        m_pGrids.reset(new TGrid[countX * countY]);
         if (!m_pGrids)
             return false;
 
@@ -35,11 +52,11 @@ public:
 
             for (int x = 0; x < countX; ++x)
             {
-                GRID::Index gridIndex = GRID::Index(x + startX, y);
+                TGrid::Index gridIndex = TGrid::Index(x + startX, y);
 
                 int arrayIndex = (y  * countX) + x;
-                GRID& grid = m_pGrids[arrayIndex];
-                new (&grid) GRID(gridIndex, radius);
+                TGrid& grid = m_pGrids[arrayIndex];
+                new (&grid) TGrid(gridIndex, radius);
             }
         }
 
@@ -48,12 +65,14 @@ public:
 
     void Release()
     {
+        m_start = Pixel();
+        m_end = Pixel();
         m_pGrids.reset();
         m_countX = 0;
         m_countY = 0;
     }
 
-    void ForEach(std::function<bool(const GRID&)> func)
+    void ForEach(std::function<bool(const TGrid&)> func)
     {
         for (uint32 y = 0; y < m_countY; ++y)
         {
@@ -66,8 +85,13 @@ public:
         }
     }
 
+    const Pixel& GetStart() const { return m_start; }
+    const Pixel& GetEnd() const { return m_end; }
+
 private:
-    std::unique_ptr<GRID[]> m_pGrids;
+    Pixel m_start;
+    Pixel m_end;
+    std::unique_ptr<TGrid[]> m_pGrids;
     uint32 m_countX;
     uint32 m_countY;
 };

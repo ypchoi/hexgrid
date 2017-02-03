@@ -40,4 +40,3 @@
 #include <array>
 #include <memory>
 #include <functional>
-
