@@ -34,9 +34,11 @@ protected:
 private:
     void CreateHexGrid();
     void DrawHexGrid();
+    void DrawSelected();
 
 private:
     typedef HexGrid_t<float, eHexGridShape::PointyTopped> TGrid;
     HexGridManager<TGrid> m_manager;
     CRect m_rect;
+    HexIndexI m_selected;
 };

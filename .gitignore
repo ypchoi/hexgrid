@@ -4,3 +4,4 @@ Release
 ipch
 /*.sdf
 /*.opendb
+/HexViewer/*.user

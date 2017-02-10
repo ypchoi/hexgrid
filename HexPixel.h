@@ -23,5 +23,17 @@ struct HexPixel_t
     }
 };
 
+template <class T>
+HexPixel_t<T> operator+(const HexPixel_t<T>& lhs, const HexPixel_t<T>& rhs)
+{
+    return HexPixel_t<T>(lhs.x + rhs.x, lhs.y + rhs.y);
+}
+
+template <class T>
+HexPixel_t<T> operator-(const HexPixel_t<T>& lhs, const HexPixel_t<T>& rhs)
+{
+    return HexPixel_t<T>(lhs.x - rhs.x, lhs.y - rhs.y);
+}
+
 typedef HexPixel_t<int> HexPixelI;
 typedef HexPixel_t<float> HexPixelF;

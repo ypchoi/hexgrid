@@ -53,6 +53,12 @@ HexCubeIndex_t<T> operator+(const HexCubeIndex_t<T>& lhs, const HexCubeIndex_t<T
     return HexCubeIndex_t<T>(lhs.x + rhs.x, lhs.y + rhs.y, lhs.z + rhs.z);
 }
 
+template <class T>
+HexCubeIndex_t<T> operator-(const HexCubeIndex_t<T>& lhs, const HexCubeIndex_t<T>& rhs)
+{
+    return HexCubeIndex_t<T>(lhs.x - rhs.x, lhs.y - rhs.y, lhs.z - rhs.z);
+}
+
 typedef HexCubeIndex_t<int> HexCubeIndexI;
 typedef HexCubeIndex_t<float> HexCubeIndexF;
 

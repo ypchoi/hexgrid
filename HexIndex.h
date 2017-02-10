@@ -46,12 +46,35 @@ struct HexIndex_t
     {
         return (std::abs(q - rhs.q) + std::abs(q + r - rhs.q - rhs.r) + std::abs(r - rhs.r)) / 2;
     }
+
+    HexIndex_t& operator=(const HexIndex_t& rhs)
+    {
+        const_cast<T&>(q) = rhs.q;
+        const_cast<T&>(r) = rhs.r;
+        return *this;
+    }
+
+    bool operator==(const HexIndex_t& rhs)
+    {
+        return q == rhs.q && r == rhs.r;
+    }
+
+    bool operator!=(const HexIndex_t& rhs)
+    {
+        return !(q == rhs);
+    }
 };
 
 template <class T>
 HexIndex_t<T> operator+(const HexIndex_t<T>& lhs, const HexIndex_t<T>& rhs)
 {
     return HexIndex_t<T>(lhs.q + rhs.q, lhs.r + rhs.r);
+}
+
+template <class T>
+HexIndex_t<T> operator-(const HexIndex_t<T>& lhs, const HexIndex_t<T>& rhs)
+{
+    return HexIndex_t<T>(lhs.q - rhs.q, lhs.r - rhs.r);
 }
 
 typedef HexIndex_t<int> HexIndexI;

@@ -80,6 +80,7 @@ void CHexViewerDlg::OnPaint()
 		CDialogEx::OnPaint();
 
         DrawHexGrid();
+        DrawSelected();
 	}
 }
 
@@ -132,6 +133,32 @@ void CHexViewerDlg::DrawHexGrid()
     });
 }
 
+void CHexViewerDlg::DrawSelected()
+{
+    const TGrid* pGrid = m_manager.GetGrid(m_selected);
+    if (!pGrid)
+        return;
+
+    CClientDC dc(this);
+
+    CPen pen;
+    pen.CreatePen(PS_SOLID, 5, RGB(255, 0, 0));    // »¡°£»ö Ææ »ý¼º
+    CPen* oldPen = dc.SelectObject(&pen);
+
+    const HexPixelF& start = m_manager.GetStart();
+
+    for (int i = 0; i < 6; ++i)
+    {
+        HexPixelF from = pGrid->GetCorner(i);
+        HexPixelF to = pGrid->GetCorner((i + 1) % 6);
+
+        dc.MoveTo(start.x + from.x, m_rect.bottom - from.y - start.y);
+        dc.LineTo(start.x + to.x, m_rect.bottom - to.y - start.y);
+    }
+
+    dc.SelectObject(oldPen);
+}
+
 void CHexViewerDlg::OnSize(UINT nType, int cx, int cy)
 {
     CreateHexGrid();
@@ -140,4 +167,14 @@ void CHexViewerDlg::OnSize(UINT nType, int cx, int cy)
 
 void CHexViewerDlg::OnMouseMove(UINT nFlags, CPoint point)
 {
+    HexPixelF pixel(point.x, m_rect.Height() - point.y);
+    const TGrid* pGrid = m_manager.GetGrid(pixel);
+    if (!pGrid)
+        return;
+
+    if (m_selected == pGrid->index)
+        return;
+
+    m_selected = pGrid->index;
+    Invalidate(FALSE);
 }
