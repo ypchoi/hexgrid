@@ -5,3 +5,4 @@
 #include "HexGrid.h"
 #include "HexGridManager.h"
 #include "HexConvert.h"
+#include "HexLine.h"

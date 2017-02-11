@@ -24,6 +24,8 @@ int _tmain(int argc, _TCHAR* argv[])
     hexi.GetNeighbors();
     hexi.GetCost(hexi);
 
+    HexLine::Get<int>(i1, i1);
+
 	return 0;
 }
 
