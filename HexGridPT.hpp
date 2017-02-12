@@ -1,3 +1,6 @@
+#include "HexConvert.h"
+#include "HexPixel.h"
+
 template <class T>
 struct HexGrid_t<T, eHexGridShape::PointyTopped>
 {
@@ -17,7 +20,7 @@ struct HexGrid_t<T, eHexGridShape::PointyTopped>
 
     HexGrid_t(const Index& index_, T radius_)
         : index(index_)
-        , center(HexConvert<Shape>::ToPixel<Index::ValueType, T>(index_, radius_))
+        , center(HexConvert<Shape>::template ToPixel<Index::ValueType, T>(index_, radius_))
         , radius(radius_)
     {
     }
@@ -39,7 +42,7 @@ struct HexGrid_t<T, eHexGridShape::PointyTopped>
     template <class INDEX>
     Pixel GetDistance(const INDEX& other) const
     {
-        Pixel otherCenter = HexConvert<Shape>::ToPixel<PIXEL>(other, radius_);
+        Pixel otherCenter = HexConvert<Shape>::template ToPixel<Pixel>(other, radius);
         return Pixel(otherCenter.x - center.x, otherCenter.y - center.y);
     }
 

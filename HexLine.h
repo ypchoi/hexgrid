@@ -24,7 +24,7 @@ struct HexLine
 
         return path;
     }
-
+    
     template <class TIn, class TOut>
     static HexCubeIndex_t<TOut> Lerp(const HexCubeIndex_t<TIn>& a, const HexCubeIndex_t<TIn>& b, float t)
     {
@@ -33,7 +33,7 @@ struct HexLine
             Lerp(a.y, b.y, t),
             Lerp(a.z, b.z, t));
     }
-
+    
     static float Lerp(float a, float b, float t)
     {
         return a + (b - a) * t;

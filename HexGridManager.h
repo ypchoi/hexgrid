@@ -3,7 +3,7 @@
 template <class TGrid>
 class HexGridManager
 {
-    typedef unsigned __int32 uint32;
+    typedef uint32_t uint32;
     typedef typename TGrid::Index Index;
     typedef typename TGrid::Pixel Pixel;
     typedef typename TGrid::Pixel::ValueType T;
@@ -54,7 +54,7 @@ public:
             for (int x = 0; x < countX; ++x)
             {
                 int arrayIndex = (y  * countX) + x;
-                TGrid::Index gridIndex = ArrayToHex(arrayIndex);
+                typename TGrid::Index gridIndex = ArrayToHex(arrayIndex);
                 TGrid& grid = m_pGrids[arrayIndex];
                 new (&grid) TGrid(gridIndex, radius);
             }
@@ -92,7 +92,7 @@ public:
     const TGrid* GetGrid(const Pixel& pixel) const
     {
         Pixel offsetted = pixel - m_start;
-        Index index = HexConvert<Shape>::ToHex<Pixel::ValueType, Index::ValueType>(offsetted, m_radius);
+        Index index = HexConvert<Shape>::template ToHex<Pixel::ValueType, Index::ValueType>(offsetted, m_radius);
         return GetGrid(index);
     }
 
@@ -135,7 +135,7 @@ private:
     Index ArrayToHex(int x, int y) const
     {
         int startX = -((y + 1) / 2);
-        return TGrid::Index(x + startX, y);
+        return typename TGrid::Index(x + startX, y);
     }
 
 private:

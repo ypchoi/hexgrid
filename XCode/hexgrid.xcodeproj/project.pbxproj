@@ -1,0 +1,278 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		D9A2C68A1E4FFBC000ACCF93 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9A2C6891E4FFBC000ACCF93 /* main.cpp */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		D9A2C6731E4FFA9A00ACCF93 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		D9A2C6751E4FFA9B00ACCF93 /* hexgrid */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = hexgrid; sourceTree = BUILT_PRODUCTS_DIR; };
+		D9A2C6891E4FFBC000ACCF93 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		D9D6A4A81E500C4500C24321 /* HexConvert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HexConvert.h; path = ../HexConvert.h; sourceTree = "<group>"; };
+		D9D6A4A91E500C4500C24321 /* HexConvertPT.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = HexConvertPT.hpp; path = ../HexConvertPT.hpp; sourceTree = "<group>"; };
+		D9D6A4AA1E500C4500C24321 /* HexCubeIndex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HexCubeIndex.h; path = ../HexCubeIndex.h; sourceTree = "<group>"; };
+		D9D6A4AB1E500C4500C24321 /* HexGrid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HexGrid.h; path = ../HexGrid.h; sourceTree = "<group>"; };
+		D9D6A4AC1E500C5A00C24321 /* HexGridManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HexGridManager.h; path = ../HexGridManager.h; sourceTree = "<group>"; };
+		D9D6A4AD1E500C5A00C24321 /* HexGridPT.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = HexGridPT.hpp; path = ../HexGridPT.hpp; sourceTree = "<group>"; };
+		D9D6A4AE1E500C5A00C24321 /* HexInclude.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HexInclude.h; path = ../HexInclude.h; sourceTree = "<group>"; };
+		D9D6A4AF1E500C5A00C24321 /* HexIndex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HexIndex.h; path = ../HexIndex.h; sourceTree = "<group>"; };
+		D9D6A4B01E500C5A00C24321 /* HexLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HexLine.h; path = ../HexLine.h; sourceTree = "<group>"; };
+		D9D6A4B11E500C5A00C24321 /* HexPixel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HexPixel.h; path = ../HexPixel.h; sourceTree = "<group>"; };
+		D9D6A4B21E5011D800C24321 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D9A2C6721E4FFA9A00ACCF93 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		D9A2C66C1E4FFA9A00ACCF93 = {
+			isa = PBXGroup;
+			children = (
+				D9D6A4B21E5011D800C24321 /* PrefixHeader.pch */,
+				D9D6A4A71E500C2300C24321 /* hexgrid */,
+				D9A2C6891E4FFBC000ACCF93 /* main.cpp */,
+				D9A2C6761E4FFA9B00ACCF93 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		D9A2C6761E4FFA9B00ACCF93 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D9A2C6751E4FFA9B00ACCF93 /* hexgrid */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D9D6A4A71E500C2300C24321 /* hexgrid */ = {
+			isa = PBXGroup;
+			children = (
+				D9D6A4AC1E500C5A00C24321 /* HexGridManager.h */,
+				D9D6A4AD1E500C5A00C24321 /* HexGridPT.hpp */,
+				D9D6A4AE1E500C5A00C24321 /* HexInclude.h */,
+				D9D6A4AF1E500C5A00C24321 /* HexIndex.h */,
+				D9D6A4B01E500C5A00C24321 /* HexLine.h */,
+				D9D6A4B11E500C5A00C24321 /* HexPixel.h */,
+				D9D6A4A81E500C4500C24321 /* HexConvert.h */,
+				D9D6A4A91E500C4500C24321 /* HexConvertPT.hpp */,
+				D9D6A4AA1E500C4500C24321 /* HexCubeIndex.h */,
+				D9D6A4AB1E500C4500C24321 /* HexGrid.h */,
+			);
+			name = hexgrid;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		D9A2C6741E4FFA9A00ACCF93 /* hexgrid */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D9A2C67C1E4FFA9B00ACCF93 /* Build configuration list for PBXNativeTarget "hexgrid" */;
+			buildPhases = (
+				D9A2C6711E4FFA9A00ACCF93 /* Sources */,
+				D9A2C6721E4FFA9A00ACCF93 /* Frameworks */,
+				D9A2C6731E4FFA9A00ACCF93 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = hexgrid;
+			productName = hexgrid;
+			productReference = D9A2C6751E4FFA9B00ACCF93 /* hexgrid */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D9A2C66D1E4FFA9A00ACCF93 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0820;
+				ORGANIZATIONNAME = AKer;
+				TargetAttributes = {
+					D9A2C6741E4FFA9A00ACCF93 = {
+						CreatedOnToolsVersion = 8.2.1;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = D9A2C6701E4FFA9A00ACCF93 /* Build configuration list for PBXProject "hexgrid" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = D9A2C66C1E4FFA9A00ACCF93;
+			productRefGroup = D9A2C6761E4FFA9B00ACCF93 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D9A2C6741E4FFA9A00ACCF93 /* hexgrid */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		D9A2C6711E4FFA9A00ACCF93 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D9A2C68A1E4FFBC000ACCF93 /* main.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		D9A2C67A1E4FFA9B00ACCF93 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		D9A2C67B1E4FFA9B00ACCF93 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		D9A2C67D1E4FFA9B00ACCF93 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				"HEADER_SEARCH_PATHS[arch=*]" = ../;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		D9A2C67E1E4FFA9B00ACCF93 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				"HEADER_SEARCH_PATHS[arch=*]" = ../;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		D9A2C6701E4FFA9A00ACCF93 /* Build configuration list for PBXProject "hexgrid" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D9A2C67A1E4FFA9B00ACCF93 /* Debug */,
+				D9A2C67B1E4FFA9B00ACCF93 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D9A2C67C1E4FFA9B00ACCF93 /* Build configuration list for PBXNativeTarget "hexgrid" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D9A2C67D1E4FFA9B00ACCF93 /* Debug */,
+				D9A2C67E1E4FFA9B00ACCF93 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D9A2C66D1E4FFA9A00ACCF93 /* Project object */;
+}
