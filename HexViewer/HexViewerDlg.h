@@ -28,17 +28,24 @@ protected:
 	afx_msg void OnPaint();
 	afx_msg void OnSize(UINT nType, int cx, int cy);
     afx_msg void OnMouseMove(UINT nFlags, CPoint point);
+    afx_msg void OnLButtonDown(UINT nFlags, CPoint point);
 	afx_msg HCURSOR OnQueryDragIcon();
 	DECLARE_MESSAGE_MAP()
 
 private:
+    typedef HexGrid_t<float, eHexGridShape::PointyTopped> TGrid;
+
     void CreateHexGrid();
     void DrawHexGrid();
-    void DrawSelected();
+    void DrawOver();
+    void DrawRoute();
+    void DrawGrid(const TGrid& grid, CClientDC& dc, COLORREF color);
+    const TGrid* GetGrid(const CPoint& point);
 
 private:
-    typedef HexGrid_t<float, eHexGridShape::PointyTopped> TGrid;
     HexGridManager<TGrid> m_manager;
     CRect m_rect;
-    HexIndexI m_selected;
+    HexIndexI m_begin;
+    HexIndexI m_over;
+    HexIndexI m_end;
 };

@@ -61,7 +61,7 @@ struct HexIndex_t
 
     bool operator!=(const HexIndex_t& rhs)
     {
-        return !(q == rhs);
+        return !(*this == rhs);
     }
 };
 

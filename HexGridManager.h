@@ -73,6 +73,13 @@ public:
         m_countY = 0;
     }
 
+    template <class T>
+    const TGrid* GetGrid(const HexCubeIndex_t<T>& cube) const
+    {
+        Index index = HexConvert<Shape>::ToHex(cube);
+        return GetGrid(index);
+    }
+
     const TGrid* GetGrid(const Index& index) const
     {
         int arrayIndex = HexToArray(index);

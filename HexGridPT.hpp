@@ -1,8 +1,9 @@
 template <class T>
 struct HexGrid_t<T, eHexGridShape::PointyTopped>
 {
-    using Index = HexIndex_t<int>;
-    using Pixel = HexPixel_t<T>;
+    typedef T ValueType;
+    typedef HexIndex_t<int> Index;
+    typedef HexPixel_t<T> Pixel;
     static const eHexGridShape Shape = eHexGridShape::PointyTopped;
 
     const Index index;

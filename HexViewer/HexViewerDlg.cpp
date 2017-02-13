@@ -11,15 +11,16 @@
 #define new DEBUG_NEW
 #endif
 
-
 // CHexViewerDlg dialog
-
-
+static const HexIndexI INVALID_INDEX = HexIndexI(-1, -1);
 
 CHexViewerDlg::CHexViewerDlg(CWnd* pParent /*=NULL*/)
 	: CDialogEx(CHexViewerDlg::IDD, pParent)
 {
 	m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
+    m_begin = INVALID_INDEX;
+    m_over = INVALID_INDEX;
+    m_end = INVALID_INDEX;
 }
 
 void CHexViewerDlg::DoDataExchange(CDataExchange* pDX)
@@ -32,6 +33,7 @@ BEGIN_MESSAGE_MAP(CHexViewerDlg, CDialogEx)
 	ON_WM_QUERYDRAGICON()
     ON_WM_SIZE()
     ON_WM_MOUSEMOVE()
+    ON_WM_LBUTTONDOWN()
 END_MESSAGE_MAP()
 
 
@@ -78,9 +80,9 @@ void CHexViewerDlg::OnPaint()
 	else
 	{
 		CDialogEx::OnPaint();
-
         DrawHexGrid();
-        DrawSelected();
+        DrawRoute();
+        DrawOver();
 	}
 }
 
@@ -110,14 +112,7 @@ void CHexViewerDlg::DrawHexGrid()
 
     m_manager.ForEach([this, &dc, &start](const TGrid& grid) -> bool
     {
-        for (int i = 0; i < 6; ++i)
-        {
-            HexPixelF from = grid.GetCorner(i);
-            HexPixelF to = grid.GetCorner((i + 1) % 6);
-
-            dc.MoveTo(start.x + from.x, m_rect.bottom - from.y - start.y);
-            dc.LineTo(start.x + to.x, m_rect.bottom - to.y - start.y);
-        }
+        DrawGrid(grid, dc, RGB(0xA0, 0xA0, 0xA0));
 
         RECT textRect;
         textRect.left = start.x + grid.center.x + 10;
@@ -133,30 +128,67 @@ void CHexViewerDlg::DrawHexGrid()
     });
 }
 
-void CHexViewerDlg::DrawSelected()
+void CHexViewerDlg::DrawOver()
 {
-    const TGrid* pGrid = m_manager.GetGrid(m_selected);
+    if (m_over == INVALID_INDEX)
+        return;
+
+    const TGrid* pGrid = m_manager.GetGrid(m_over);
     if (!pGrid)
         return;
 
     CClientDC dc(this);
+    DrawGrid(*pGrid, dc, RGB(0xFF, 0, 0));
+}
 
+void CHexViewerDlg::DrawRoute()
+{
+    if (m_begin == INVALID_INDEX || (m_over == INVALID_INDEX && m_end == INVALID_INDEX))
+        return;
+
+    CClientDC dc(this);
+
+    HexIndexI endIndex = (m_end != INVALID_INDEX) ? m_end : m_over;
+
+    HexCubeIndexI beginCube = HexConvert<TGrid::Shape>::ToCube(m_begin);
+    HexCubeIndexI endCube = HexConvert<TGrid::Shape>::ToCube(endIndex);
+
+    auto route = HexLine::Get(beginCube, endCube);
+    for (const auto& r : route)
+    {
+        const TGrid* pGrid = m_manager.GetGrid(r);
+        if (!pGrid)
+            continue;
+
+        DrawGrid(*pGrid, dc, RGB(0, 0, 0xFF));
+    }
+}
+
+void CHexViewerDlg::DrawGrid(const TGrid& grid, CClientDC& dc, COLORREF color)
+{
     CPen pen;
-    pen.CreatePen(PS_SOLID, 5, RGB(255, 0, 0));    // »¡°£»ö Ææ »ý¼º
+    pen.CreatePen(PS_SOLID, 5, color);
     CPen* oldPen = dc.SelectObject(&pen);
 
     const HexPixelF& start = m_manager.GetStart();
 
     for (int i = 0; i < 6; ++i)
     {
-        HexPixelF from = pGrid->GetCorner(i);
-        HexPixelF to = pGrid->GetCorner((i + 1) % 6);
+        HexPixelF from = grid.GetCorner(i) + start;
+        HexPixelF to = grid.GetCorner((i + 1) % 6) + start;
 
-        dc.MoveTo(start.x + from.x, m_rect.bottom - from.y - start.y);
-        dc.LineTo(start.x + to.x, m_rect.bottom - to.y - start.y);
+        dc.MoveTo(from.x, m_rect.bottom - from.y);
+        dc.LineTo(to.x, m_rect.bottom - to.y);
     }
 
     dc.SelectObject(oldPen);
+}
+
+const CHexViewerDlg::TGrid* CHexViewerDlg::GetGrid(const CPoint & point)
+{
+    HexPixelF pixel(point.x, m_rect.Height() - point.y);
+    const TGrid* pGrid = m_manager.GetGrid(pixel);
+    return pGrid;
 }
 
 void CHexViewerDlg::OnSize(UINT nType, int cx, int cy)
@@ -167,14 +199,29 @@ void CHexViewerDlg::OnSize(UINT nType, int cx, int cy)
 
 void CHexViewerDlg::OnMouseMove(UINT nFlags, CPoint point)
 {
-    HexPixelF pixel(point.x, m_rect.Height() - point.y);
-    const TGrid* pGrid = m_manager.GetGrid(pixel);
+    const TGrid* pGrid = GetGrid(point);
+    if (!pGrid || m_over == pGrid->index)
+        return;
+
+    m_over = pGrid->index;
+    Invalidate(TRUE);
+}
+
+void CHexViewerDlg::OnLButtonDown(UINT nFlags, CPoint point)
+{
+    const TGrid* pGrid = GetGrid(point);
     if (!pGrid)
         return;
 
-    if (m_selected == pGrid->index)
-        return;
+    if (m_begin == INVALID_INDEX || m_end != INVALID_INDEX)
+    {
+        m_begin = pGrid->index;
+        m_end = INVALID_INDEX;
+    }
+    else
+    {
+        m_end = pGrid->index;
+    }
 
-    m_selected = pGrid->index;
     Invalidate(FALSE);
 }
