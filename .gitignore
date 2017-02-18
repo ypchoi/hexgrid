@@ -5,3 +5,5 @@ ipch
 /*.sdf
 /*.opendb
 /HexViewer/*.user
+/*.xcbkptlist
+/*.xcuserstate
