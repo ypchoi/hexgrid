@@ -25,8 +25,8 @@ int main(int argc, const char * argv[])
     
     HexIndexI a2(1, 2);
     HexIndexI b2(4, 5);
-    HexCubeIndexI a3 = HexConvert<eHexGridShape::PointyTopped>::ToHex<int, int>(a2);
-    HexCubeIndexI b3 = HexConvertPT::ToHex<int, int>(b2);
+    HexCubeIndexI a3 = HexConvert<eHexGridShape::PointyTopped>::ToCube(a2);
+    HexCubeIndexI b3 = HexConvertPT::ToCube(b2);
     auto line2 = HexLine::Get(a3, b3);
     
     return 0;

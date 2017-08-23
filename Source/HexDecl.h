@@ -1,5 +1,17 @@
 #pragma once
 
+#ifndef __inout
+#define __inout
+#endif
+
+#ifndef __in
+#define __in
+#endif
+
+#ifndef __out
+#define __out
+#endif
+
 enum class eHexGridShape
 {
     PointyTopped,
