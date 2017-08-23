@@ -49,14 +49,14 @@ public:
         m_countX = countX;
         m_countY = countY;
 
-        for (int y = 0; y < countY; ++y)
+        for (uint32 y = 0; y < countY; ++y)
         {
-            for (int x = 0; x < countX; ++x)
+            for (uint32 x = 0; x < countX; ++x)
             {
                 int arrayIndex = (y  * countX) + x;
                 typename TGrid::Index gridIndex = ArrayToHex(arrayIndex);
                 TGrid& grid = m_pGrids[arrayIndex];
-                new (&grid) TGrid(gridIndex, radius);
+                new (&grid) TGrid(m_start, gridIndex, radius);
             }
         }
 
@@ -73,16 +73,9 @@ public:
         m_countY = 0;
     }
 
-    template <class T>
-    const TGrid* GetGrid(const HexCubeIndex_t<T>& cube) const
-    {
-        Index index = HexConvert<Shape>::ToHex(cube);
-        return GetGrid(index);
-    }
-
     const TGrid* GetGrid(const Index& index) const
     {
-        int arrayIndex = HexToArray(index);
+        int arrayIndex = HexToArray1D(index);
         if (arrayIndex < 0)
             return nullptr;
 
@@ -92,7 +85,7 @@ public:
     const TGrid* GetGrid(const Pixel& pixel) const
     {
         Pixel offsetted = pixel - m_start;
-        Index index = HexConvert<Shape>::template ToHex<Pixel::ValueType, Index::ValueType>(offsetted, m_radius);
+        Index index = HexConvert<Shape>::template ToHex<typename Pixel::ValueType, typename Index::ValueType>(offsetted, m_radius);
         return GetGrid(index);
     }
 
@@ -109,17 +102,33 @@ public:
         }
     }
 
+    bool IsOuter(const Index& index) const
+    {
+        int x = -1;
+        int y = -1;
+        HexToArray2D(index, x, y);
+
+        return (x == 0 || y == 0 || x + 1 == m_countX || y + 1 == m_countY);
+    }
+
     const Pixel& GetStart() const { return m_start; }
     const Pixel& GetEnd() const { return m_end; }
 
 private:
-    int HexToArray(const Index& index) const
+    void HexToArray2D(const Index& index, __inout int& x, __inout int& y) const
     {
-        int y = index.r;
+        y = index.r;
         int startX = -((y + 1) / 2);
-        int x = index.q - startX;
+        x = index.q - startX;
+    }
 
-        if (x < 0 || y < 0 || m_countX <= x || m_countY <= y)
+    int HexToArray1D(const Index& index) const
+    {
+        int x = -1;
+        int y = -1;
+        HexToArray2D(index, x, y);
+
+        if (x < 0 || y < 0 || (int)m_countX <= x || (int)m_countY <= y)
             return -1;
 
         return (y * m_countX) + x;

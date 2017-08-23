@@ -15,9 +15,9 @@
 static const HexIndexI INVALID_INDEX = HexIndexI(-1, -1);
 
 CHexViewerDlg::CHexViewerDlg(CWnd* pParent /*=NULL*/)
-	: CDialogEx(CHexViewerDlg::IDD, pParent)
+    : CDialogEx(CHexViewerDlg::IDD, pParent)
 {
-	m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
+    m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
     m_begin = INVALID_INDEX;
     m_over = INVALID_INDEX;
     m_end = INVALID_INDEX;
@@ -25,12 +25,12 @@ CHexViewerDlg::CHexViewerDlg(CWnd* pParent /*=NULL*/)
 
 void CHexViewerDlg::DoDataExchange(CDataExchange* pDX)
 {
-	CDialogEx::DoDataExchange(pDX);
+    CDialogEx::DoDataExchange(pDX);
 }
 
 BEGIN_MESSAGE_MAP(CHexViewerDlg, CDialogEx)
-	ON_WM_PAINT()
-	ON_WM_QUERYDRAGICON()
+    ON_WM_PAINT()
+    ON_WM_QUERYDRAGICON()
     ON_WM_SIZE()
     ON_WM_MOUSEMOVE()
     ON_WM_LBUTTONDOWN()
@@ -41,17 +41,17 @@ END_MESSAGE_MAP()
 
 BOOL CHexViewerDlg::OnInitDialog()
 {
-	CDialogEx::OnInitDialog();
+    CDialogEx::OnInitDialog();
 
-	// Set the icon for this dialog.  The framework does this automatically
-	//  when the application's main window is not a dialog
-	SetIcon(m_hIcon, TRUE);			// Set big icon
-	SetIcon(m_hIcon, FALSE);		// Set small icon
+    // Set the icon for this dialog.  The framework does this automatically
+    //  when the application's main window is not a dialog
+    SetIcon(m_hIcon, TRUE);			// Set big icon
+    SetIcon(m_hIcon, FALSE);		// Set small icon
 
-	// TODO: Add extra initialization here
+    // TODO: Add extra initialization here
     CreateHexGrid();
 
-	return TRUE;  // return TRUE  unless you set the focus to a control
+    return TRUE;  // return TRUE  unless you set the focus to a control
 }
 
 // If you add a minimize button to your dialog, you will need the code below
@@ -60,37 +60,37 @@ BOOL CHexViewerDlg::OnInitDialog()
 
 void CHexViewerDlg::OnPaint()
 {
-	if (IsIconic())
-	{
-		CPaintDC dc(this); // device context for painting
+    if (IsIconic())
+    {
+        CPaintDC dc(this); // device context for painting
 
-		SendMessage(WM_ICONERASEBKGND, reinterpret_cast<WPARAM>(dc.GetSafeHdc()), 0);
+        SendMessage(WM_ICONERASEBKGND, reinterpret_cast<WPARAM>(dc.GetSafeHdc()), 0);
 
-		// Center icon in client rectangle
-		int cxIcon = GetSystemMetrics(SM_CXICON);
-		int cyIcon = GetSystemMetrics(SM_CYICON);
-		CRect rect;
-		GetClientRect(&rect);
-		int x = (rect.Width() - cxIcon + 1) / 2;
-		int y = (rect.Height() - cyIcon + 1) / 2;
+        // Center icon in client rectangle
+        int cxIcon = GetSystemMetrics(SM_CXICON);
+        int cyIcon = GetSystemMetrics(SM_CYICON);
+        CRect rect;
+        GetClientRect(&rect);
+        int x = (rect.Width() - cxIcon + 1) / 2;
+        int y = (rect.Height() - cyIcon + 1) / 2;
 
-		// Draw the icon
-		dc.DrawIcon(x, y, m_hIcon);
-	}
-	else
-	{
-		CDialogEx::OnPaint();
+        // Draw the icon
+        dc.DrawIcon(x, y, m_hIcon);
+    }
+    else
+    {
+        CDialogEx::OnPaint();
         DrawHexGrid();
         DrawRoute();
         DrawOver();
-	}
+    }
 }
 
 // The system calls this function to obtain the cursor to display while the user drags
 //  the minimized window.
 HCURSOR CHexViewerDlg::OnQueryDragIcon()
 {
-	return static_cast<HCURSOR>(m_hIcon);
+    return static_cast<HCURSOR>(m_hIcon);
 }
 
 void CHexViewerDlg::CreateHexGrid()
@@ -156,7 +156,8 @@ void CHexViewerDlg::DrawRoute()
     auto route = HexLine::Get(beginCube, endCube);
     for (const auto& r : route)
     {
-        const TGrid* pGrid = m_manager.GetGrid(r);
+        HexIndexI hex = HexConvert<TGrid::Shape>::ToHex(r);
+        const TGrid* pGrid = m_manager.GetGrid(hex);
         if (!pGrid)
             continue;
 

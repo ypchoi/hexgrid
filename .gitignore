@@ -2,8 +2,12 @@
 Debug
 Release
 ipch
-/*.sdf
-/*.opendb
-/HexViewer/*.user
-/*.xcbkptlist
-/*.xcuserstate
+/VisualStudio/.vs
+/VisualStudio/Debug
+/VisualStudio/Release
+/VisualStudio/ipch
+*.sdf
+*.opendb
+*.user
+*.xcbkptlist
+*.xcuserstate

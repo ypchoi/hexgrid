@@ -1,5 +1,4 @@
 #pragma once
-// http://www.redblobgames.com/grids/hexagons/
 
 enum class eHexGridShape
 {
@@ -8,8 +7,10 @@ enum class eHexGridShape
 };
 
 template <class T, eHexGridShape SHAPE>
-struct HexGrid_t
-{
-};
+struct HexGrid_t;
 
-#include "HexGridPT.hpp"
+template <class TGrid>
+class HexGridManager;
+
+template <class T>
+struct HexIndex_t;

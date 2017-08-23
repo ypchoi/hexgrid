@@ -1,4 +1,5 @@
 #pragma once
+#include "HexDecl.h"
 #include "HexIndex.h"
 #include "HexCubeIndex.h"
 #include "HexPixel.h"

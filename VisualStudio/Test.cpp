@@ -2,13 +2,13 @@
 //
 
 #include "stdafx.h"
-#include "HexInclude.h"
-#include "HexPixel.h"
+#include "../Source/HexInclude.h"
 
-int _tmain(int argc, _TCHAR* argv[])
+int _tmain(int /*argc*/, _TCHAR* /*argv*/[])
 {
+    HexPixelF offset(512.0f, 256.0f);
     HexIndexI hex(0, 0);
-    HexGrid_t<float, eHexGridShape::PointyTopped> grid(hex, 10.0f);
+    HexGrid_t<float, eHexGridShape::PointyTopped> grid(offset, hex, 10.0f);
     for (int i = 0; i < 6; ++i)
     {
         HexPixelF pixel = grid.GetCorner(i);
@@ -26,6 +26,6 @@ int _tmain(int argc, _TCHAR* argv[])
 
     HexLine::Get<int>(i1, i1);
 
-	return 0;
+    return 0;
 }
 

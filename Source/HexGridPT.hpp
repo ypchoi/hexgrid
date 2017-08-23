@@ -1,12 +1,16 @@
 #include "HexConvert.h"
 #include "HexPixel.h"
 
+#ifndef M_PI
+#define M_PI       3.14159265358979323846   // pi
+#endif
+
+
 template <class T>
 struct HexGrid_t<T, eHexGridShape::PointyTopped>
 {
-    typedef T ValueType;
-    typedef HexIndex_t<int> Index;
-    typedef HexPixel_t<T> Pixel;
+    using Index = HexIndex_t<int>;
+    using Pixel = HexPixel_t<T>;
     static const eHexGridShape Shape = eHexGridShape::PointyTopped;
 
     const Index index;
@@ -18,9 +22,9 @@ struct HexGrid_t<T, eHexGridShape::PointyTopped>
     {
     }
 
-    HexGrid_t(const Index& index_, T radius_)
+    HexGrid_t(const Pixel& offset, const Index& index_, T radius_)
         : index(index_)
-        , center(HexConvert<Shape>::template ToPixel<Index::ValueType, T>(index_, radius_))
+        , center(offset + HexConvert<Shape>::template ToPixel<Index::ValueType, T>(index_, radius_))
         , radius(radius_)
     {
     }

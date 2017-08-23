@@ -4,8 +4,9 @@ struct HexConvert<eHexGridShape::PointyTopped>
     template <class TIn, class TOut = TIn>
     static HexIndex_t<TOut> ToHex(const HexPixel_t<TIn>& p, TIn radius)
     {
-        TIn q = ((p.x * std::sqrt(3.0f) - p.y) / 3.0f) / radius;
-        TIn r = ((p.y * 2.0f) / 3.0f) / radius;
+        TIn Inv3Radius = 1 / (3.0f * radius);
+        TIn q = (p.x * std::sqrt(3.0f) - p.y) * Inv3Radius;
+        TIn r = (p.y * 2.0f) * Inv3Radius;
         return Round<TIn, TOut>(HexIndex_t<TIn>(q, r));
     }
 
@@ -42,9 +43,9 @@ struct HexConvert<eHexGridShape::PointyTopped>
     template <class TIn, class TOut>
     static HexCubeIndex_t<TOut> Round(const HexCubeIndex_t<TIn>& rhs)
     {
-        TOut rx = static_cast<TOut>(std::round(rhs.x));
-        TOut ry = static_cast<TOut>(std::round(rhs.y));
-        TOut rz = static_cast<TOut>(std::round(rhs.z));
+        TOut rx = static_cast<TOut>(::round(rhs.x));
+        TOut ry = static_cast<TOut>(::round(rhs.y));
+        TOut rz = static_cast<TOut>(::round(rhs.z));
 
         auto dx = std::abs(rx - rhs.x);
         auto dy = std::abs(ry - rhs.y);
