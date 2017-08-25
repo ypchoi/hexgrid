@@ -26,6 +26,12 @@ int _tmain(int /*argc*/, _TCHAR* /*argv*/[])
 
     HexLine::Get<int>(i1, i1);
 
+    HexGridManager<decltype(grid)> gridManager;
+    gridManager.Create(offset, offset + HexPixelF(1024, 1024), 64);
+
+    HexAStar<decltype(grid)> pathFinder;
+    pathFinder.FindPath(HexIndexI(0, 0), HexIndexI(10, 10));
+
     return 0;
 }
 

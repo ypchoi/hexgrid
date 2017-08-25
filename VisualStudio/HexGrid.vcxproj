@@ -74,6 +74,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\Source\HexAStar.h" />
     <ClInclude Include="..\Source\HexConvert.h" />
     <ClInclude Include="..\Source\HexConvertPT.hpp" />
     <ClInclude Include="..\Source\HexCubeIndex.h" />

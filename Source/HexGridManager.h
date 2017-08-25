@@ -34,7 +34,6 @@ public:
         T totalHeight = end.y - start.y;
 
         T gridWidth = TGrid::GetWidth(radius);
-        T gridHeight = TGrid::GetHeight(radius);
 
         T gridDistanceH = TGrid::GetHorizontalDistance(radius);
         T gridDistanceV = TGrid::GetVerticalDistance(radius);

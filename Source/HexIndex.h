@@ -54,14 +54,19 @@ struct HexIndex_t
         return *this;
     }
 
-    bool operator==(const HexIndex_t& rhs)
+    bool operator==(const HexIndex_t& rhs) const
     {
         return q == rhs.q && r == rhs.r;
     }
 
-    bool operator!=(const HexIndex_t& rhs)
+    bool operator!=(const HexIndex_t& rhs) const
     {
         return !(*this == rhs);
+    }
+
+    bool operator<(const HexIndex_t& rhs) const
+    {
+        return std::tie(q, r) < std::tie(rhs.q, rhs.r);
     }
 };
 
@@ -79,3 +84,12 @@ HexIndex_t<T> operator-(const HexIndex_t<T>& lhs, const HexIndex_t<T>& rhs)
 
 typedef HexIndex_t<int> HexIndexI;
 typedef HexIndex_t<float> HexIndexF;
+
+template <class T>
+struct HexIndexHash
+{
+    size_t operator()(const HexIndex_t<T>& Index) const
+    {
+        return Index.q << 16 | Index.r;
+    }
+};
