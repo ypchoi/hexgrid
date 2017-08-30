@@ -5,9 +5,9 @@
 template <typename LayoutType>
 class HexGrid
 {
-    typename typedef LayoutType::PointType PointType;
-    typename typedef LayoutType::PointType::ValueType T;
-    typename typedef HexCube_t<int> HexCube;
+    typedef typename LayoutType::PointType PointType;
+    typedef typename LayoutType::PointType::ValueType T;
+    typedef HexCube_t<int> HexCube;
 
 public:
     HexGrid(const LayoutType& layout)
@@ -44,7 +44,7 @@ public:
         return true;
     }
 
-    typedef std::function<void(HexCube&)> TForEachFunc;
+    typedef std::function<void(HexCube)> TForEachFunc;
     void ForEach(TForEachFunc func)
     {
         for (int y = 0; y < static_cast<int>(m_countY); ++y)
@@ -53,7 +53,7 @@ public:
             {
                 int q = m_layout.ConvertIndexToQ(x, y);
                 int r = m_layout.ConvertIndexToR(x, y);
-                func(typename HexCube(q, r));
+                func(HexCube(q, r));
             }
         }
     }

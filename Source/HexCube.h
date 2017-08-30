@@ -83,7 +83,7 @@ struct HexCube_t
     template <typename U>
     HexPoint_t<U> GetCorner(const HexLayout_t<U>& layout, int corner) const
     {
-        return GetCenter(layout) + layout.GetCornerOffset<U>(corner);
+        return GetCenter(layout) + layout.template GetCornerOffset<U>(corner);
     }
 
     template <typename U>
@@ -98,7 +98,7 @@ struct HexCube_t
 
         for (int i = 0; i < 6; ++i)
         {
-            corners.emplace_back(center + layout.GetCornerOffset<U>(i));
+            corners.emplace_back(center + layout.template GetCornerOffset<U>(i));
         }
 
         return corners;

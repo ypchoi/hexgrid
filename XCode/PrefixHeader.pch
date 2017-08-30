@@ -16,6 +16,5 @@
 #import <cmath>
 #import <list>
 #include <iostream>
-#include "HexInclude.h"
 
 #endif /* PrefixHeader_pch */

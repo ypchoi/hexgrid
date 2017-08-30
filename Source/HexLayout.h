@@ -23,7 +23,7 @@ struct HexLayout_t
     HexPoint_t<U> GetCornerOffset(int corner) const
     {
         double angle = 2.0 * M_PI * (orientation.startRadian - corner) / 6;
-        return HexPoint(half.x * std::cos(angle), half.y * std::sin(angle));
+        return PointType(half.x * std::cos(angle), half.y * std::sin(angle));
     }
 
     T GetUnitWidth() const

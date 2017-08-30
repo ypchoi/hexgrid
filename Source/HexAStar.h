@@ -40,7 +40,7 @@ struct HexCubeHash
 
 class HexAStar
 {
-    typedef typename HexCube_t<int> HexCube;
+    typedef HexCube_t<int> HexCube;
 
     typedef std::unordered_map<HexCube, HexCube, HexCubeHash<int>> TRoute;
     typedef std::unordered_map<HexCube, double, HexCubeHash<int>> TCosts;

@@ -1,5 +1,18 @@
 #pragma once
 // http://www.redblobgames.com/grids/hexagons/
+
+#ifndef __in
+#define __in
+#endif
+
+#ifndef __out
+#define __out
+#endif
+
+#ifndef __inout
+#define __inout
+#endif
+
 #include "HexPoint.h"
 #include "HexOrientation.h"
 #include "HexLayout.h"

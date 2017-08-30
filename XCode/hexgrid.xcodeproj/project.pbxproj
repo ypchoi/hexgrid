@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D9A2C68A1E4FFBC000ACCF93 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9A2C6891E4FFBC000ACCF93 /* main.cpp */; };
+		D9A9F0B01F563C5E00DA5D24 /* Test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9A9F0AF1F563C5E00DA5D24 /* Test.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -23,19 +23,17 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		D9767DC31F4E4C17001A4531 /* HexConvert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HexConvert.h; path = ../Source/HexConvert.h; sourceTree = "<group>"; };
-		D9767DC41F4E4C17001A4531 /* HexConvertPT.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = HexConvertPT.hpp; path = ../Source/HexConvertPT.hpp; sourceTree = "<group>"; };
-		D9767DC51F4E4C17001A4531 /* HexCubeIndex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HexCubeIndex.h; path = ../Source/HexCubeIndex.h; sourceTree = "<group>"; };
-		D9767DC61F4E4C17001A4531 /* HexDecl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HexDecl.h; path = ../Source/HexDecl.h; sourceTree = "<group>"; };
-		D9767DC71F4E4C17001A4531 /* HexGrid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HexGrid.h; path = ../Source/HexGrid.h; sourceTree = "<group>"; };
-		D9767DC81F4E4C17001A4531 /* HexGridManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HexGridManager.h; path = ../Source/HexGridManager.h; sourceTree = "<group>"; };
-		D9767DC91F4E4C17001A4531 /* HexGridPT.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = HexGridPT.hpp; path = ../Source/HexGridPT.hpp; sourceTree = "<group>"; };
-		D9767DCA1F4E4C17001A4531 /* HexInclude.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HexInclude.h; path = ../Source/HexInclude.h; sourceTree = "<group>"; };
-		D9767DCB1F4E4C17001A4531 /* HexIndex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HexIndex.h; path = ../Source/HexIndex.h; sourceTree = "<group>"; };
-		D9767DCC1F4E4C17001A4531 /* HexLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HexLine.h; path = ../Source/HexLine.h; sourceTree = "<group>"; };
-		D9767DCD1F4E4C17001A4531 /* HexPixel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HexPixel.h; path = ../Source/HexPixel.h; sourceTree = "<group>"; };
 		D9A2C6751E4FFA9B00ACCF93 /* hexgrid */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = hexgrid; sourceTree = BUILT_PRODUCTS_DIR; };
-		D9A2C6891E4FFBC000ACCF93 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		D9A9F0A61F563C1700DA5D24 /* HexAStar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HexAStar.h; path = ../Source/HexAStar.h; sourceTree = "<group>"; };
+		D9A9F0A71F563C1700DA5D24 /* HexCube.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HexCube.h; path = ../Source/HexCube.h; sourceTree = "<group>"; };
+		D9A9F0A81F563C1700DA5D24 /* HexGrid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HexGrid.h; path = ../Source/HexGrid.h; sourceTree = "<group>"; };
+		D9A9F0A91F563C1700DA5D24 /* HexInclude.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HexInclude.h; path = ../Source/HexInclude.h; sourceTree = "<group>"; };
+		D9A9F0AA1F563C1700DA5D24 /* HexIndex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HexIndex.h; path = ../Source/HexIndex.h; sourceTree = "<group>"; };
+		D9A9F0AB1F563C1700DA5D24 /* HexLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HexLayout.h; path = ../Source/HexLayout.h; sourceTree = "<group>"; };
+		D9A9F0AC1F563C1700DA5D24 /* HexOffset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HexOffset.h; path = ../Source/HexOffset.h; sourceTree = "<group>"; };
+		D9A9F0AD1F563C1700DA5D24 /* HexOrientation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HexOrientation.h; path = ../Source/HexOrientation.h; sourceTree = "<group>"; };
+		D9A9F0AE1F563C1700DA5D24 /* HexPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HexPoint.h; path = ../Source/HexPoint.h; sourceTree = "<group>"; };
+		D9A9F0AF1F563C5E00DA5D24 /* Test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Test.cpp; path = ../VisualStudio/Test.cpp; sourceTree = "<group>"; };
 		D9D6A4B21E5011D800C24321 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -53,9 +51,9 @@
 		D9A2C66C1E4FFA9A00ACCF93 = {
 			isa = PBXGroup;
 			children = (
+				D9A9F0AF1F563C5E00DA5D24 /* Test.cpp */,
 				D9D6A4B21E5011D800C24321 /* PrefixHeader.pch */,
 				D9D6A4A71E500C2300C24321 /* Source */,
-				D9A2C6891E4FFBC000ACCF93 /* main.cpp */,
 				D9A2C6761E4FFA9B00ACCF93 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -71,17 +69,15 @@
 		D9D6A4A71E500C2300C24321 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				D9767DC31F4E4C17001A4531 /* HexConvert.h */,
-				D9767DC41F4E4C17001A4531 /* HexConvertPT.hpp */,
-				D9767DC51F4E4C17001A4531 /* HexCubeIndex.h */,
-				D9767DC61F4E4C17001A4531 /* HexDecl.h */,
-				D9767DC71F4E4C17001A4531 /* HexGrid.h */,
-				D9767DC81F4E4C17001A4531 /* HexGridManager.h */,
-				D9767DC91F4E4C17001A4531 /* HexGridPT.hpp */,
-				D9767DCA1F4E4C17001A4531 /* HexInclude.h */,
-				D9767DCB1F4E4C17001A4531 /* HexIndex.h */,
-				D9767DCC1F4E4C17001A4531 /* HexLine.h */,
-				D9767DCD1F4E4C17001A4531 /* HexPixel.h */,
+				D9A9F0A61F563C1700DA5D24 /* HexAStar.h */,
+				D9A9F0A71F563C1700DA5D24 /* HexCube.h */,
+				D9A9F0A81F563C1700DA5D24 /* HexGrid.h */,
+				D9A9F0A91F563C1700DA5D24 /* HexInclude.h */,
+				D9A9F0AA1F563C1700DA5D24 /* HexIndex.h */,
+				D9A9F0AB1F563C1700DA5D24 /* HexLayout.h */,
+				D9A9F0AC1F563C1700DA5D24 /* HexOffset.h */,
+				D9A9F0AD1F563C1700DA5D24 /* HexOrientation.h */,
+				D9A9F0AE1F563C1700DA5D24 /* HexPoint.h */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -143,7 +139,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D9A2C68A1E4FFBC000ACCF93 /* main.cpp in Sources */,
+				D9A9F0B01F563C5E00DA5D24 /* Test.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
