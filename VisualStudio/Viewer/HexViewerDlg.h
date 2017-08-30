@@ -3,7 +3,12 @@
 //
 
 #pragma once
+#include <vector>
 #include "../../Source/HexInclude.h"
+
+typedef HexLayout_t<double> HexLayout;
+typedef HexCube_t<int> HexCube;
+typedef HexPoint_t<double> HexPoint;
 
 // CHexViewerDlg dialog
 class CHexViewerDlg : public CDialogEx
@@ -33,19 +38,19 @@ protected:
     DECLARE_MESSAGE_MAP()
 
 private:
-    typedef HexGrid_t<float, eHexGridShape::PointyTopped> TGrid;
-
     void CreateHexGrid();
+    void DrawBackground();
     void DrawHexGrid();
     void DrawOver();
     void DrawRoute();
-    void DrawGrid(const TGrid& grid, CClientDC& dc, COLORREF color);
-    const TGrid* GetGrid(const CPoint& point);
+    void DrawGrid(const HexCube& grid, CClientDC& dc, COLORREF color);
+    bool GetGrid(HexCube& out, const CPoint& point);
 
 private:
-    HexGridManager<TGrid> m_manager;
+    HexGrid<HexLayout> m_manager;
     CRect m_rect;
-    HexIndexI m_begin;
-    HexIndexI m_over;
-    HexIndexI m_end;
+    CRect m_gridRect;
+    HexCube m_begin;
+    HexCube m_over;
+    HexCube m_end;
 };

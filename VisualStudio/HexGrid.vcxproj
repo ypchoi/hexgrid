@@ -75,17 +75,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\Source\HexAStar.h" />
-    <ClInclude Include="..\Source\HexConvert.h" />
-    <ClInclude Include="..\Source\HexConvertPT.hpp" />
-    <ClInclude Include="..\Source\HexCubeIndex.h" />
-    <ClInclude Include="..\Source\HexDecl.h" />
+    <ClInclude Include="..\Source\HexCube.h" />
     <ClInclude Include="..\Source\HexGrid.h" />
-    <ClInclude Include="..\Source\HexGridManager.h" />
-    <ClInclude Include="..\Source\HexGridPT.hpp" />
     <ClInclude Include="..\Source\HexInclude.h" />
-    <ClInclude Include="..\Source\HexIndex.h" />
-    <ClInclude Include="..\Source\HexLine.h" />
-    <ClInclude Include="..\Source\HexPixel.h" />
+    <ClInclude Include="..\Source\HexLayout.h" />
+    <ClInclude Include="..\Source\HexOffset.h" />
+    <ClInclude Include="..\Source\HexOrientation.h" />
+    <ClInclude Include="..\Source\HexPoint.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>

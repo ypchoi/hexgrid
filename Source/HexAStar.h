@@ -2,6 +2,8 @@
 #include <queue>
 #include <unordered_map>
 
+
+
 template<typename T, typename TPriority>
 struct PriorityQueue
 {
@@ -27,21 +29,21 @@ struct PriorityQueue
     }
 };
 
-template <class TGrid>
-class HexGridManager;
+template <class T>
+struct HexCubeHash
+{
+    size_t operator()(const HexCube_t<T>& cube) const
+    {
+        return cube.q << 16 | cube.r;
+    }
+};
 
-template <class TGrid>
 class HexAStar
 {
-    typedef uint32_t uint32;
-    typedef typename TGrid::Index Index;
-    typedef typename TGrid::Index::ValueType IndexValueType;
-    typedef typename TGrid::Pixel Pixel;
-    typedef typename TGrid::Pixel::ValueType T;
-    typedef typename HexGridManager<TGrid> GridManager;
-    typedef std::unordered_map<Index, Index, HexIndexHash<IndexValueType>> TRoute;
-    typedef std::unordered_map<Index, float, HexIndexHash<IndexValueType>> TCosts;
-    static const eHexGridShape Shape = TGrid::Shape;
+    typedef typename HexCube_t<int> HexCube;
+
+    typedef std::unordered_map<HexCube, HexCube, HexCubeHash<int>> TRoute;
+    typedef std::unordered_map<HexCube, double, HexCubeHash<int>> TCosts;
 
 public:
     HexAStar()
@@ -52,7 +54,7 @@ public:
     {
     }
 
-    std::list<Index> FindPath(const Index& from, const Index& to)
+    std::list<HexCube> FindPath(const HexCube& from, const HexCube& to)
     {
         TRoute cameFrom;
         TCosts costSoFar;
@@ -62,13 +64,9 @@ public:
 
 protected:
 
-    void AStar(
-        const Index& from,
-        const Index& to,
-        TRoute& cameFrom,
-        TCosts& costSoFar)
+    void AStar(const HexCube& from, const HexCube& to, TRoute& cameFrom, TCosts& costSoFar)
     {
-        PriorityQueue<Index, double> frontier;
+        PriorityQueue<HexCube, double> frontier;
         frontier.Put(from, 0);
 
         cameFrom[from] = from;
@@ -96,11 +94,11 @@ protected:
         }
     }
 
-    std::list<Index> ReconstructPath(const Index& from, const Index& to, const TRoute& cameFrom)
+    std::list<HexCube> ReconstructPath(const HexCube& from, const HexCube& to, const TRoute& cameFrom)
     {
-        std::list<Index> path;
+        std::list<HexCube> path;
 
-        Index current = to;
+        HexCube current = to;
         path.push_back(current);
 
         while (current != from)
@@ -114,14 +112,14 @@ protected:
         return path;
     }
 
-    virtual double Cost(const Index& From, const Index& To)
+    virtual double Cost(const HexCube& From, const HexCube& To)
     {
-        return From.GetCost(To);
+        return From.GetDistance(To);
     }
 
-    virtual double Heuristic(const Index& From, const Index& To)
+    virtual double Heuristic(const HexCube& From, const HexCube& To)
     {
-        return From.GetCost(To);
+        return From.GetDistance(To);
     }
 };
 

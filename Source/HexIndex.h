@@ -85,11 +85,3 @@ HexIndex_t<T> operator-(const HexIndex_t<T>& lhs, const HexIndex_t<T>& rhs)
 typedef HexIndex_t<int> HexIndexI;
 typedef HexIndex_t<float> HexIndexF;
 
-template <class T>
-struct HexIndexHash
-{
-    size_t operator()(const HexIndex_t<T>& Index) const
-    {
-        return Index.q << 16 | Index.r;
-    }
-};

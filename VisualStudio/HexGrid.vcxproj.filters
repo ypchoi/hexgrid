@@ -15,40 +15,28 @@
     <ClInclude Include="targetver.h">
       <Filter>Precompiled</Filter>
     </ClInclude>
-    <ClInclude Include="..\Source\HexConvert.h">
+    <ClInclude Include="..\Source\HexAStar.h">
       <Filter>Source</Filter>
     </ClInclude>
-    <ClInclude Include="..\Source\HexConvertPT.hpp">
-      <Filter>Source</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Source\HexCubeIndex.h">
-      <Filter>Source</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Source\HexDecl.h">
-      <Filter>Source</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Source\HexGrid.h">
-      <Filter>Source</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Source\HexGridManager.h">
-      <Filter>Source</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Source\HexGridPT.hpp">
+    <ClInclude Include="..\Source\HexCube.h">
       <Filter>Source</Filter>
     </ClInclude>
     <ClInclude Include="..\Source\HexInclude.h">
       <Filter>Source</Filter>
     </ClInclude>
-    <ClInclude Include="..\Source\HexIndex.h">
+    <ClInclude Include="..\Source\HexLayout.h">
       <Filter>Source</Filter>
     </ClInclude>
-    <ClInclude Include="..\Source\HexLine.h">
+    <ClInclude Include="..\Source\HexOffset.h">
       <Filter>Source</Filter>
     </ClInclude>
-    <ClInclude Include="..\Source\HexPixel.h">
+    <ClInclude Include="..\Source\HexGrid.h">
       <Filter>Source</Filter>
     </ClInclude>
-    <ClInclude Include="..\Source\HexAStar.h">
+    <ClInclude Include="..\Source\HexPoint.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\HexOrientation.h">
       <Filter>Source</Filter>
     </ClInclude>
   </ItemGroup>
