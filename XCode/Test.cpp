@@ -113,7 +113,7 @@ void test_layout()
     pointy.GetUnitWidth();
     pointy.GetUnitHeight();
 
-    HexGrid<HexLayout> manager(pointy);
+    HexGrid_t<HexLayout> manager(pointy);
     manager.Create(HexPoint(1024, 1024));
 
     HexCube out;

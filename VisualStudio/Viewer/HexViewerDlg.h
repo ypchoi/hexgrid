@@ -47,7 +47,7 @@ private:
     bool GetGrid(HexCube& out, const CPoint& point);
 
 private:
-    HexGrid<HexLayout> m_manager;
+    HexGrid_t<HexLayout> m_manager;
     CRect m_rect;
     CRect m_gridRect;
     HexCube m_begin;

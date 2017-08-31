@@ -3,19 +3,19 @@
 
 
 template <typename LayoutType>
-class HexGrid
+class HexGrid_t
 {
     typedef typename LayoutType::PointType PointType;
     typedef typename LayoutType::PointType::ValueType T;
     typedef HexCube_t<int> HexCube;
 
 public:
-    HexGrid(const LayoutType& layout)
+    HexGrid_t(const LayoutType& layout)
         : m_layout(layout), m_countX(0), m_countY(0)
     {
     }
 
-    ~HexGrid() = default;
+    ~HexGrid_t() = default;
 
     bool Create(const PointType& totalSize)
     {
