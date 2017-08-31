@@ -1,5 +1,5 @@
 // Generated code -- http://www.redblobgames.com/grids/hexagons/
-#include "stdafx.h"
+#import "PrefixHeader.pch"
 #include "../Source/HexInclude.h"
 
 

@@ -33,7 +33,7 @@
 		D9A9F0AC1F563C1700DA5D24 /* HexOffset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HexOffset.h; path = ../Source/HexOffset.h; sourceTree = "<group>"; };
 		D9A9F0AD1F563C1700DA5D24 /* HexOrientation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HexOrientation.h; path = ../Source/HexOrientation.h; sourceTree = "<group>"; };
 		D9A9F0AE1F563C1700DA5D24 /* HexPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HexPoint.h; path = ../Source/HexPoint.h; sourceTree = "<group>"; };
-		D9A9F0AF1F563C5E00DA5D24 /* Test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Test.cpp; path = ../VisualStudio/Test.cpp; sourceTree = "<group>"; };
+		D9A9F0AF1F563C5E00DA5D24 /* Test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Test.cpp; path = ../XCode/Test.cpp; sourceTree = "<group>"; };
 		D9D6A4B21E5011D800C24321 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
