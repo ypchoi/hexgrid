@@ -200,13 +200,13 @@ struct HexCube_t
         static_assert(std::is_integral<T>::value, "Should be integral");
         static_assert(std::is_floating_point<U>::value, "Should be floating point");
 
-        T q = T(std::round(frac.q));
-        T r = T(std::round(frac.r));
-        T s = T(std::round(frac.s));
+        T q = T(round(frac.q));
+        T r = T(round(frac.r));
+        T s = T(round(frac.s));
 
-        U diffQ = std::abs(q - frac.q);
-        U diffR = std::abs(r - frac.r);
-        U diffS = std::abs(s - frac.s);
+        U diffQ = abs(q - frac.q);
+        U diffR = abs(r - frac.r);
+        U diffS = abs(s - frac.s);
 
         if (diffR < diffQ && diffS < diffQ)
         {
