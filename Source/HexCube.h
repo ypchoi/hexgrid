@@ -127,7 +127,7 @@ struct HexCube_t
 
         for (int i = 0; i < 6; ++i)
         {
-            neighbors.emplace_back(GetDirection(i));
+            neighbors.emplace_back(*this + GetDirection(i));
         }
 
         return neighbors;
@@ -160,7 +160,7 @@ struct HexCube_t
 
     size_t GetLength() const
     {
-        return size_t((std::abs(q) + std::abs(r) + std::abs(s)) / 2);
+        return size_t((abs(q) + abs(r) + abs(s)) / 2);
     }
 
     size_t GetDistance(const HexCube_t& rhs) const

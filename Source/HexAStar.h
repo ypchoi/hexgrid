@@ -1,4 +1,5 @@
 #pragma once
+#include <assert.h>
 #include <queue>
 #include <unordered_map>
 
@@ -29,7 +30,7 @@ struct PriorityQueue
     }
 };
 
-template <class T>
+template <typename T>
 struct HexCubeHash
 {
     size_t operator()(const HexCube_t<T>& cube) const
@@ -38,23 +39,18 @@ struct HexCubeHash
     }
 };
 
+template <typename T>
 class HexAStar
 {
-    typedef HexCube_t<int> HexCube;
-
-    typedef std::unordered_map<HexCube, HexCube, HexCubeHash<int>> TRoute;
-    typedef std::unordered_map<HexCube, double, HexCubeHash<int>> TCosts;
-
 public:
-    HexAStar()
-    {
-    }
+    HexAStar() = default;
+    virtual ~HexAStar() = default;
 
-    virtual ~HexAStar()
-    {
-    }
+    typedef HexCube_t<T> CubeType;
+    typedef std::unordered_map<CubeType, CubeType, HexCubeHash<int>> TRoute;
+    typedef std::unordered_map<CubeType, double, HexCubeHash<int>> TCosts;
 
-    std::list<HexCube> FindPath(const HexCube& from, const HexCube& to)
+    std::list<CubeType> FindPath(const CubeType& from, const CubeType& to)
     {
         TRoute cameFrom;
         TCosts costSoFar;
@@ -63,10 +59,9 @@ public:
     }
 
 protected:
-
-    void AStar(const HexCube& from, const HexCube& to, TRoute& cameFrom, TCosts& costSoFar)
+    void AStar(const CubeType& from, const CubeType& to, TRoute& cameFrom, TCosts& costSoFar)
     {
-        PriorityQueue<HexCube, double> frontier;
+        PriorityQueue<CubeType, double> frontier;
         frontier.Put(from, 0);
 
         cameFrom[from] = from;
@@ -94,16 +89,18 @@ protected:
         }
     }
 
-    std::list<HexCube> ReconstructPath(const HexCube& from, const HexCube& to, const TRoute& cameFrom)
+    std::list<CubeType> ReconstructPath(const CubeType& from, const CubeType& to, const TRoute& cameFrom)
     {
-        std::list<HexCube> path;
+        std::list<CubeType> path;
 
-        HexCube current = to;
+        CubeType current = to;
         path.push_back(current);
 
         while (current != from)
         {
             auto it = cameFrom.find(current);
+            assert(it != cameFrom.end());
+
             current = it->second;
             path.push_back(current);
         }
@@ -112,12 +109,12 @@ protected:
         return path;
     }
 
-    virtual double Cost(const HexCube& From, const HexCube& To)
+    virtual double Cost(const CubeType& From, const CubeType& To)
     {
         return From.GetDistance(To);
     }
 
-    virtual double Heuristic(const HexCube& From, const HexCube& To)
+    virtual double Heuristic(const CubeType& From, const CubeType& To)
     {
         return From.GetDistance(To);
     }
