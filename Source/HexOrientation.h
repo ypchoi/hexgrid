@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #define SQRT3 (std::sqrt(3))
 
 
@@ -34,7 +34,7 @@ struct HexOrientation
     {
         TConvertFunc indexToQ = [](int x, int y)
         {
-            return -((y + 1) / 2) + x;
+            return -(y / 2) + x;
         };
 
         TConvertFunc indexToR = [](int /*x*/, int y)
@@ -70,4 +70,3 @@ struct HexOrientation
             indexToQ, indexToR);
     }
 };
-

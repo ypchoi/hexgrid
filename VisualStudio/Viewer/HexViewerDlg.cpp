@@ -1,4 +1,4 @@
-
+﻿
 // HexViewerDlg.cpp : implementation file
 //
 
@@ -48,8 +48,8 @@ BOOL CHexViewerDlg::OnInitDialog()
 
     // Set the icon for this dialog.  The framework does this automatically
     //  when the application's main window is not a dialog
-    SetIcon(m_hIcon, TRUE);			// Set big icon
-    SetIcon(m_hIcon, FALSE);		// Set small icon
+    SetIcon(m_hIcon, TRUE);         // Set big icon
+    SetIcon(m_hIcon, FALSE);        // Set small icon
 
     return TRUE;  // return TRUE  unless you set the focus to a control
 }
@@ -126,7 +126,8 @@ void CHexViewerDlg::DrawHexGrid()
 
     m_manager.ForEach([this, &layout, &dc](const HexCube& grid)
     {
-        DrawGrid(grid, dc, RGB(0x80, 0x80, 0x80));
+        DWORD color = RGB(0x80, 0x80, 0x80);
+        DrawGrid(grid, dc, color);
 
         HexPoint center = grid.GetCenter(layout);
 
@@ -137,7 +138,7 @@ void CHexViewerDlg::DrawHexGrid()
         textRect.bottom = textRect.right + 1;
 
         CString text;
-        text.Format(L"%d,%d", grid.q, grid.r);
+        text.Format(L"%d,%d,%d", grid.q, grid.r, grid.s);
         dc.DrawText(text, &textRect, DT_NOCLIP | DT_CENTER | DT_VCENTER);
     });
 }

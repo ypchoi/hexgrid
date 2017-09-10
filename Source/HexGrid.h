@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 
 
@@ -37,7 +37,7 @@ public:
 
     bool GetGrid(__out HexCube& out, const PointType& pixel) const
     {
-        if (pixel.x < m_start.x || pixel.y < m_start.y || m_end.x < pixel.x || m_end.y < pixel.y)
+        if (!IsInside(pixel))
             return false;
 
         out = HexCube(HexCube_t<double>(m_layout, pixel));
@@ -58,9 +58,10 @@ public:
         }
     }
 
-    bool IsOuter(const HexCube& cube) const
+    bool IsInside(const PointType& point) const
     {
-        return false;
+        return m_start.x <= point.x && point.x <= m_end.x
+            && m_start.y <= point.y && point.y <= m_end.y;
     }
 
     const LayoutType& GetLayout() const { return m_layout; }
@@ -73,4 +74,5 @@ private:
     PointType m_end;
     size_t m_countX;
     size_t m_countY;
+    std::vector<std::vector<HexCube>> m_cubes;
 };
