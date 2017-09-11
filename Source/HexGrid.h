@@ -74,5 +74,4 @@ private:
     PointType m_end;
     size_t m_countX;
     size_t m_countY;
-    std::vector<std::vector<HexCube>> m_cubes;
 };
