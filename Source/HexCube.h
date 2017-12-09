@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 
 
@@ -104,7 +104,7 @@ struct HexCube_t
         return corners;
     }
 
-    HexCube_t GetDirection(int direction) const
+    static HexCube_t GetDirection(int direction)
     {
         static const std::vector<HexCube_t> s_directions =
         {
@@ -144,6 +144,27 @@ struct HexCube_t
         return *this + s_diagonals[direction % 6];
     }
 
+    std::set<HexCube_t> GetNeighborsInRange(int count) const
+    {
+        std::set<HexCube_t> cubes;
+
+        for (int c = 0; c <= count; ++c)
+        {
+            HexCube_t cube = *this + (GetDirection(4) * c);
+
+            for (int i = 0; i < 6; ++i)
+            {
+                for (int j = 0; j < c; ++j)
+                {
+                    cubes.insert(cube);
+                    cube = cube.GetNeighbor(i);
+                }
+            }
+        }
+
+        return cubes;
+    }
+
     HexOffsetQ GetOffsetQ(int offset) const
     {
         return HexOffsetQ(
@@ -160,7 +181,7 @@ struct HexCube_t
 
     size_t GetLength() const
     {
-        return size_t((abs(q) + abs(r) + abs(s)) / 2);
+        return size_t((std::abs(q) + std::abs(r) + std::abs(s)) / 2);
     }
 
     size_t GetDistance(const HexCube_t& rhs) const
@@ -204,9 +225,9 @@ struct HexCube_t
         T r = T(round(frac.r));
         T s = T(round(frac.s));
 
-        U diffQ = abs(q - frac.q);
-        U diffR = abs(r - frac.r);
-        U diffS = abs(s - frac.s);
+        U diffQ = std::abs(q - frac.q);
+        U diffR = std::abs(r - frac.r);
+        U diffS = std::abs(s - frac.s);
 
         if (diffR < diffQ && diffS < diffQ)
         {
@@ -246,7 +267,7 @@ struct HexCube_t
 
     HexCube_t operator*(int k) const
     {
-        return HexCube(q * k, r * k, s * k);
+        return HexCube_t(q * k, r * k, s * k);
     }
 
     bool operator==(const HexCube_t& rhs) const
