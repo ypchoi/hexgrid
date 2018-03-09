@@ -1,4 +1,6 @@
 ﻿#pragma once
+#include <functional>
+
 #define SQRT3 (std::sqrt(3))
 
 

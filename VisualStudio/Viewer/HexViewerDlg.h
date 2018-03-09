@@ -1,10 +1,10 @@
-
+﻿
 // HexViewerDlg.h : header file
 //
 
 #pragma once
 #include <vector>
-#include "../../Source/HexInclude.h"
+#include "../../Include/HexInclude.h"
 
 typedef HexLayout_t<double> HexLayout;
 typedef HexCube_t<int> HexCube;
@@ -15,13 +15,13 @@ class CHexViewerDlg : public CDialogEx
 {
 // Construction
 public:
-    CHexViewerDlg(CWnd* pParent = NULL);	// standard constructor
+    CHexViewerDlg(CWnd* pParent = NULL);    // standard constructor
 
 // Dialog Data
     enum { IDD = IDD_HEXVIEWER_DIALOG };
 
     protected:
-    virtual void DoDataExchange(CDataExchange* pDX);	// DDX/DDV support
+    virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
 
 
 // Implementation
