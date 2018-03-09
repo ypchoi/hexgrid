@@ -1,6 +1,6 @@
-// Generated code -- http://www.redblobgames.com/grids/hexagons/
+﻿// Generated code -- http://www.redblobgames.com/grids/hexagons/
 #include "stdafx.h"
-#include "../Source/HexInclude.h"
+#include "../Include/HexInclude.h"
 
 
 typedef HexPoint_t<double> HexPoint;
@@ -170,4 +170,3 @@ int main()
     test_all();
     return 0;
 }
-
