@@ -4,8 +4,8 @@
     <Filter Include="Precompiled">
       <UniqueIdentifier>{ad5ad498-d98f-4341-8cdf-d2017e62fc44}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source">
-      <UniqueIdentifier>{269c7188-f9da-4825-a4d0-1de07cf74f67}</UniqueIdentifier>
+    <Filter Include="Include">
+      <UniqueIdentifier>{379a3597-ea1a-4186-af0d-80db2361308c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -15,29 +15,32 @@
     <ClInclude Include="targetver.h">
       <Filter>Precompiled</Filter>
     </ClInclude>
-    <ClInclude Include="..\Source\HexAStar.h">
-      <Filter>Source</Filter>
+    <ClInclude Include="..\Include\HexAStar.h">
+      <Filter>Include</Filter>
     </ClInclude>
-    <ClInclude Include="..\Source\HexCube.h">
-      <Filter>Source</Filter>
+    <ClInclude Include="..\Include\HexCube.h">
+      <Filter>Include</Filter>
     </ClInclude>
-    <ClInclude Include="..\Source\HexInclude.h">
-      <Filter>Source</Filter>
+    <ClInclude Include="..\Include\HexGrid.h">
+      <Filter>Include</Filter>
     </ClInclude>
-    <ClInclude Include="..\Source\HexLayout.h">
-      <Filter>Source</Filter>
+    <ClInclude Include="..\Include\HexInclude.h">
+      <Filter>Include</Filter>
     </ClInclude>
-    <ClInclude Include="..\Source\HexOffset.h">
-      <Filter>Source</Filter>
+    <ClInclude Include="..\Include\HexIndex.h">
+      <Filter>Include</Filter>
     </ClInclude>
-    <ClInclude Include="..\Source\HexGrid.h">
-      <Filter>Source</Filter>
+    <ClInclude Include="..\Include\HexLayout.h">
+      <Filter>Include</Filter>
     </ClInclude>
-    <ClInclude Include="..\Source\HexPoint.h">
-      <Filter>Source</Filter>
+    <ClInclude Include="..\Include\HexOffset.h">
+      <Filter>Include</Filter>
     </ClInclude>
-    <ClInclude Include="..\Source\HexOrientation.h">
-      <Filter>Source</Filter>
+    <ClInclude Include="..\Include\HexOrientation.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\HexPoint.h">
+      <Filter>Include</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
