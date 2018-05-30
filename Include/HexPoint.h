@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 
 
@@ -26,6 +26,16 @@ struct HexPoint_t
     {
     }
 
+    static HexPoint_t Min(const HexPoint_t& lhs, const HexPoint_t& rhs)
+    {
+        return HexPoint_t((std::min)(lhs.x, rhs.x), (std::min)(lhs.y, rhs.y));
+    }
+
+    static HexPoint_t Max(const HexPoint_t& lhs, const HexPoint_t& rhs)
+    {
+        return HexPoint_t((std::max)(lhs.x, rhs.x), (std::max)(lhs.y, rhs.y));
+    }
+
     HexPoint_t operator+(const HexPoint_t& rhs) const
     {
         return HexPoint_t(x + rhs.x, y + rhs.y);
@@ -36,4 +46,3 @@ struct HexPoint_t
         return HexPoint_t(x - rhs.x, y - rhs.y);
     }
 };
-

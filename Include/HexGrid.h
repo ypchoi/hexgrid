@@ -64,6 +64,47 @@ public:
             && m_start.y <= point.y && point.y <= m_end.y;
     }
 
+    std::set<HexCube> IntersectBox(const PointType& minIn, const PointType& maxIn) const
+    {
+        std::set<HexCube> grids;
+
+        T minX = (std::min)(minIn.x, maxIn.x);
+        T minY = (std::min)(minIn.y, maxIn.y);
+
+        T maxX = (std::max)(minIn.x, maxIn.x);
+        T maxY = (std::max)(minIn.y, maxIn.y);
+
+        const PointType minPoint = PointType::Max(m_start, PointType(minX, minY));
+        const PointType maxPoint = PointType::Min(PointType(maxX, maxY), m_end);
+
+        T xInterval = m_layout.GetUnitWidth() * 0.5f;
+        T yInterval = m_layout.GetUnitHeight() * 0.5f;
+
+        T width = maxPoint.x - minPoint.x;
+        T height = maxPoint.y - minPoint.y;
+
+        int xCount = (int)std::ceil(width / xInterval);
+        int yCount = (int)std::ceil(height / yInterval);
+
+        for (int yIndex = 0; yIndex <= yCount; ++yIndex)
+        {
+            T y = (std::min)(minPoint.y + (yIndex * yInterval), maxPoint.y);
+
+            for (int xIndex =0; xIndex <= xCount; ++xIndex)
+            {
+                T x = (std::min)(minPoint.x + (xIndex * xInterval), maxPoint.x);
+
+                HexCube grid;
+                if (GetGrid(grid, PointType(x, y)))
+                {
+                    grids.insert(grid);
+                }
+            }
+        }
+
+        return grids;
+    }
+
     const LayoutType& GetLayout() const { return m_layout; }
     const PointType& GetStart() const { return m_start; }
     const PointType& GetEnd() const { return m_end; }
