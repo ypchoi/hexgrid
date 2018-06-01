@@ -84,6 +84,7 @@ void CHexViewerDlg::OnPaint()
         DrawHexGrid();
         DrawRoute();
         DrawOver();
+        DrawBox();
     }
 }
 
@@ -111,8 +112,6 @@ void CHexViewerDlg::CreateHexGrid()
 
 void CHexViewerDlg::DrawBackground()
 {
-    const HexLayout& layout = m_manager.GetLayout();
-
     CClientDC dc(this);
     dc.FillSolidRect(&m_rect, RGB(0xFF, 0xFF, 0xFF));
     dc.FillSolidRect(&m_gridRect, RGB(0xC0, 0xC0, 0xC0));
@@ -150,6 +149,35 @@ void CHexViewerDlg::DrawOver()
 
     CClientDC dc(this);
     DrawGrid(m_over, dc, RGB(0xFF, 0, 0));
+}
+
+void CHexViewerDlg::DrawBox()
+{
+    if (m_begin == INVALID_INDEX || m_end == INVALID_INDEX)
+        return;
+
+    CClientDC dc(this);
+
+    {
+        CPoint begin = HexPointToPoint(m_beginPoint);
+        CPoint end = HexPointToPoint(m_endPoint);
+
+        m_boxRect.left = (std::min)(begin.x, end.x);
+        m_boxRect.top = (std::min)(begin.y, end.y);
+        m_boxRect.right = (std::max)(begin.x, end.x);
+        m_boxRect.bottom = (std::max)(begin.y, end.y);
+        dc.FillSolidRect(&m_boxRect, RGB(0xC0, 0x80, 0x00));
+    }
+
+    {
+        HexCube endIndex = (m_end != INVALID_INDEX) ? m_end : m_over;
+        std::set<HexCube> grids = m_manager.IntersectBox(m_beginPoint, m_endPoint);
+
+        for (const auto& r : grids)
+        {
+            DrawGrid(r, dc, RGB(0x00, 0x80, 0x00));
+        }
+    }
 }
 
 void CHexViewerDlg::DrawRoute()
@@ -190,10 +218,14 @@ void CHexViewerDlg::DrawGrid(const HexCube& grid, CClientDC& dc, COLORREF color)
     dc.SelectObject(oldPen);
 }
 
-bool CHexViewerDlg::GetGrid(HexCube& out, const CPoint & point)
+HexPoint CHexViewerDlg::PointToHexPoint(const CPoint& point) const
 {
-    HexPoint hp(point.x, m_rect.Height() - point.y);
-    return m_manager.GetGrid(out, hp);
+    return HexPoint(point.x, m_rect.Height() - point.y);
+}
+
+CPoint CHexViewerDlg::HexPointToPoint(const HexPoint& hp) const
+{
+    return CPoint(hp.x, m_rect.Height() - hp.y);
 }
 
 void CHexViewerDlg::OnSize(UINT nType, int cx, int cy)
@@ -204,9 +236,14 @@ void CHexViewerDlg::OnSize(UINT nType, int cx, int cy)
 
 void CHexViewerDlg::OnMouseMove(UINT nFlags, CPoint point)
 {
+    const HexPoint hp = PointToHexPoint(point);
+
     HexCube grid;
-    if (GetGrid(grid, point))
+    if (m_manager.GetGrid(grid, hp))
     {
+        if (m_over == grid)
+            return;
+
         m_over = grid;
         Invalidate(TRUE);
     }
@@ -214,18 +251,22 @@ void CHexViewerDlg::OnMouseMove(UINT nFlags, CPoint point)
 
 void CHexViewerDlg::OnLButtonDown(UINT nFlags, CPoint point)
 {
+    const HexPoint hp = PointToHexPoint(point);
+
     HexCube grid;
-    if (!GetGrid(grid, point))
+    if (!m_manager.GetGrid(grid, hp))
         return;
 
     if (m_begin == INVALID_INDEX || m_end != INVALID_INDEX)
     {
         m_begin = grid;
         m_end = INVALID_INDEX;
+        m_beginPoint = hp;
     }
     else
     {
         m_end = grid;
+        m_endPoint = hp;
     }
 
     Invalidate(FALSE);

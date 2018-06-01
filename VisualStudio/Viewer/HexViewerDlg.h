@@ -42,15 +42,20 @@ private:
     void DrawBackground();
     void DrawHexGrid();
     void DrawOver();
+    void DrawBox();
     void DrawRoute();
     void DrawGrid(const HexCube& grid, CClientDC& dc, COLORREF color);
-    bool GetGrid(HexCube& out, const CPoint& point);
+    HexPoint PointToHexPoint(const CPoint& point) const;
+    CPoint HexPointToPoint(const HexPoint& hp) const;
 
 private:
     HexGrid_t<HexLayout> m_manager;
     CRect m_rect;
     CRect m_gridRect;
+    CRect m_boxRect;
     HexCube m_begin;
     HexCube m_over;
     HexCube m_end;
+    HexPoint m_beginPoint;
+    HexPoint m_endPoint;
 };
