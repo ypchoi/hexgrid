@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 // http://www.redblobgames.com/grids/hexagons/
 
 #ifndef __in
@@ -13,6 +13,7 @@
 #define __inout
 #endif
 
+#include "HexMath.h"
 #include "HexPoint.h"
 #include "HexOrientation.h"
 #include "HexLayout.h"

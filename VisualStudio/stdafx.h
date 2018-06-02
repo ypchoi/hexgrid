@@ -12,5 +12,3 @@
 
 // TODO: reference additional headers your program requires here
 #include <iostream>
-#define _USE_MATH_DEFINES
-#include <cmath>

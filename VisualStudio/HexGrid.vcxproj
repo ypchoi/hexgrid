@@ -80,6 +80,7 @@
     <ClInclude Include="..\Include\HexInclude.h" />
     <ClInclude Include="..\Include\HexIndex.h" />
     <ClInclude Include="..\Include\HexLayout.h" />
+    <ClInclude Include="..\Include\HexMath.h" />
     <ClInclude Include="..\Include\HexOffset.h" />
     <ClInclude Include="..\Include\HexOrientation.h" />
     <ClInclude Include="..\Include\HexPoint.h" />

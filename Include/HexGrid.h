@@ -30,8 +30,8 @@ public:
         T distanceH = m_layout.GetHorizontalDistance();
         T distanceV = m_layout.GetVerticalDistance();
 
-        m_countX = (size_t)std::ceil((totalSize.x + gridWidth * 0.5f) / distanceH);
-        m_countY = (size_t)std::ceil((totalSize.y + gridHeight * 0.5f) / distanceV);
+        m_countX = (size_t)HexMath::Ceil((totalSize.x + gridWidth * 0.5f) / distanceH);
+        m_countY = (size_t)HexMath::Ceil((totalSize.y + gridHeight * 0.5f) / distanceV);
         return true;
     }
 
@@ -68,31 +68,31 @@ public:
     {
         std::set<HexCube> grids;
 
-        T minX = (std::min)(minIn.x, maxIn.x);
-        T minY = (std::min)(minIn.y, maxIn.y);
+        T xInterval = m_layout.GetUnitWidth() * 0.5f;
+        T yInterval = m_layout.GetUnitHeight() * 0.5f;
 
-        T maxX = (std::max)(minIn.x, maxIn.x);
-        T maxY = (std::max)(minIn.y, maxIn.y);
+        T minX = HexMath::Min(minIn.x, maxIn.x);
+        T minY = HexMath::Min(minIn.y, maxIn.y);
+
+        T maxX = HexMath::Max(minIn.x, maxIn.x);
+        T maxY = HexMath::Max(minIn.y, maxIn.y);
 
         const PointType minPoint = PointType::Max(m_start, PointType(minX, minY));
         const PointType maxPoint = PointType::Min(PointType(maxX, maxY), m_end);
 
-        T xInterval = m_layout.GetUnitWidth() * 0.5f;
-        T yInterval = m_layout.GetUnitHeight() * 0.5f;
-
         T width = maxPoint.x - minPoint.x;
         T height = maxPoint.y - minPoint.y;
 
-        int xCount = (int)std::ceil(width / xInterval);
-        int yCount = (int)std::ceil(height / yInterval);
+        int xCount = (int)HexMath::Ceil(width / xInterval);
+        int yCount = (int)HexMath::Ceil(height / yInterval);
 
         for (int yIndex = 0; yIndex <= yCount; ++yIndex)
         {
-            T y = (std::min)(minPoint.y + (yIndex * yInterval), maxPoint.y);
+            T y = HexMath::Min(minPoint.y + (yIndex * yInterval), maxPoint.y);
 
             for (int xIndex =0; xIndex <= xCount; ++xIndex)
             {
-                T x = (std::min)(minPoint.x + (xIndex * xInterval), maxPoint.x);
+                T x = HexMath::Min(minPoint.x + (xIndex * xInterval), maxPoint.x);
 
                 HexCube grid;
                 if (GetGrid(grid, PointType(x, y)))

@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 template <class T>
 struct HexCubeIndex_t;
 
@@ -44,7 +44,7 @@ struct HexIndex_t
 
     int GetCost(const HexIndex_t& rhs) const
     {
-        return (std::abs(q - rhs.q) + std::abs(q + r - rhs.q - rhs.r) + std::abs(r - rhs.r)) / 2;
+        return (HexMath::Abs(q - rhs.q) + HexMath::Abs(q + r - rhs.q - rhs.r) + HexMath::Abs(r - rhs.r)) / 2;
     }
 
     HexIndex_t& operator=(const HexIndex_t& rhs)
@@ -84,4 +84,3 @@ HexIndex_t<T> operator-(const HexIndex_t<T>& lhs, const HexIndex_t<T>& rhs)
 
 typedef HexIndex_t<int> HexIndexI;
 typedef HexIndex_t<float> HexIndexF;
-

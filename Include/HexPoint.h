@@ -28,12 +28,12 @@ struct HexPoint_t
 
     static HexPoint_t Min(const HexPoint_t& lhs, const HexPoint_t& rhs)
     {
-        return HexPoint_t((std::min)(lhs.x, rhs.x), (std::min)(lhs.y, rhs.y));
+        return HexPoint_t(HexMath::Min(lhs.x, rhs.x), HexMath::Min(lhs.y, rhs.y));
     }
 
     static HexPoint_t Max(const HexPoint_t& lhs, const HexPoint_t& rhs)
     {
-        return HexPoint_t((std::max)(lhs.x, rhs.x), (std::max)(lhs.y, rhs.y));
+        return HexPoint_t(HexMath::Max(lhs.x, rhs.x), HexMath::Max(lhs.y, rhs.y));
     }
 
     HexPoint_t operator+(const HexPoint_t& rhs) const

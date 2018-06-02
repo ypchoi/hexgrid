@@ -183,7 +183,7 @@ struct HexCube_t
 
     size_t GetLength() const
     {
-        return size_t((std::abs(q) + std::abs(r) + std::abs(s)) / 2);
+        return size_t((HexMath::Abs(q) + HexMath::Abs(r) + HexMath::Abs(s)) / 2);
     }
 
     size_t GetDistance(const HexCube_t& rhs) const
@@ -223,13 +223,13 @@ struct HexCube_t
         static_assert(std::is_integral<T>::value, "Should be integral");
         static_assert(std::is_floating_point<U>::value, "Should be floating point");
 
-        T q = T(round(frac.q));
-        T r = T(round(frac.r));
-        T s = T(round(frac.s));
+        T q = T(HexMath::Round(frac.q));
+        T r = T(HexMath::Round(frac.r));
+        T s = T(HexMath::Round(frac.s));
 
-        U diffQ = std::abs(q - frac.q);
-        U diffR = std::abs(r - frac.r);
-        U diffS = std::abs(s - frac.s);
+        U diffQ = HexMath::Abs(q - frac.q);
+        U diffR = HexMath::Abs(r - frac.r);
+        U diffS = HexMath::Abs(s - frac.s);
 
         if (diffR < diffQ && diffS < diffQ)
         {
