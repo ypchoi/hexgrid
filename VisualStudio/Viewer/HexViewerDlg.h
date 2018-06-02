@@ -42,7 +42,8 @@ private:
     void DrawBackground();
     void DrawHexGrid();
     void DrawOver();
-    void DrawBox();
+    void DrawIntersectedBox();
+    void DrawIntersectedGrid();
     void DrawRoute();
     void DrawGrid(const HexCube& grid, CClientDC& dc, COLORREF color);
     HexPoint PointToHexPoint(const CPoint& point) const;

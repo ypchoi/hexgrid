@@ -81,10 +81,11 @@ void CHexViewerDlg::OnPaint()
     {
         CDialogEx::OnPaint();
         DrawBackground();
+        DrawIntersectedBox();
         DrawHexGrid();
         DrawRoute();
+        DrawIntersectedGrid();
         DrawOver();
-        DrawBox();
     }
 }
 
@@ -151,32 +152,35 @@ void CHexViewerDlg::DrawOver()
     DrawGrid(m_over, dc, RGB(0xFF, 0, 0));
 }
 
-void CHexViewerDlg::DrawBox()
+void CHexViewerDlg::DrawIntersectedBox()
+{
+    if (m_begin == INVALID_INDEX || m_end == INVALID_INDEX)
+        return;
+
+    CPoint begin = HexPointToPoint(m_beginPoint);
+    CPoint end = HexPointToPoint(m_endPoint);
+
+    CClientDC dc(this);
+    m_boxRect.left = (std::min)(begin.x, end.x);
+    m_boxRect.top = (std::min)(begin.y, end.y);
+    m_boxRect.right = (std::max)(begin.x, end.x);
+    m_boxRect.bottom = (std::max)(begin.y, end.y);
+    dc.FillSolidRect(&m_boxRect, RGB(0xC0, 0x80, 0x00));
+}
+
+void CHexViewerDlg::DrawIntersectedGrid()
 {
     if (m_begin == INVALID_INDEX || m_end == INVALID_INDEX)
         return;
 
     CClientDC dc(this);
 
+    HexCube endIndex = (m_end != INVALID_INDEX) ? m_end : m_over;
+    std::set<HexCube> grids = m_manager.IntersectBox(m_beginPoint, m_endPoint);
+
+    for (const auto& r : grids)
     {
-        CPoint begin = HexPointToPoint(m_beginPoint);
-        CPoint end = HexPointToPoint(m_endPoint);
-
-        m_boxRect.left = (std::min)(begin.x, end.x);
-        m_boxRect.top = (std::min)(begin.y, end.y);
-        m_boxRect.right = (std::max)(begin.x, end.x);
-        m_boxRect.bottom = (std::max)(begin.y, end.y);
-        dc.FillSolidRect(&m_boxRect, RGB(0xC0, 0x80, 0x00));
-    }
-
-    {
-        HexCube endIndex = (m_end != INVALID_INDEX) ? m_end : m_over;
-        std::set<HexCube> grids = m_manager.IntersectBox(m_beginPoint, m_endPoint);
-
-        for (const auto& r : grids)
-        {
-            DrawGrid(r, dc, RGB(0x00, 0x80, 0x00));
-        }
+        DrawGrid(r, dc, RGB(0x00, 0xFF, 0x00));
     }
 }
 
