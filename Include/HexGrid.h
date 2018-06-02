@@ -66,34 +66,21 @@ public:
 
     std::set<HexCube> IntersectBox(const PointType& minIn, const PointType& maxIn) const
     {
-        std::set<HexCube> grids;
-
+        T minX = HexMath::Min(minIn.x, maxIn.x, m_end.x);
+        T minY = HexMath::Min(minIn.y, maxIn.y, m_end.y);
+        T maxX = HexMath::Max(minIn.x, maxIn.x, m_start.x);
+        T maxY = HexMath::Max(minIn.y, maxIn.y, m_start.y);
         T xInterval = m_layout.GetUnitWidth() * 0.5f;
         T yInterval = m_layout.GetUnitHeight() * 0.5f;
 
-        T minX = HexMath::Min(minIn.x, maxIn.x);
-        T minY = HexMath::Min(minIn.y, maxIn.y);
+        std::vector<T> snapsX = GetSnaps(minX, maxX, xInterval);
+        std::vector<T> snapsY = GetSnaps(minY, maxY, yInterval);
 
-        T maxX = HexMath::Max(minIn.x, maxIn.x);
-        T maxY = HexMath::Max(minIn.y, maxIn.y);
-
-        const PointType minPoint = PointType::Max(m_start, PointType(minX, minY));
-        const PointType maxPoint = PointType::Min(PointType(maxX, maxY), m_end);
-
-        T width = maxPoint.x - minPoint.x;
-        T height = maxPoint.y - minPoint.y;
-
-        int xCount = (int)HexMath::Ceil(width / xInterval);
-        int yCount = (int)HexMath::Ceil(height / yInterval);
-
-        for (int yIndex = 0; yIndex <= yCount; ++yIndex)
+        std::set<HexCube> grids;
+        for (T y : snapsY)
         {
-            T y = HexMath::Min(minPoint.y + (yIndex * yInterval), maxPoint.y);
-
-            for (int xIndex =0; xIndex <= xCount; ++xIndex)
+            for (T x : snapsX)
             {
-                T x = HexMath::Min(minPoint.x + (xIndex * xInterval), maxPoint.x);
-
                 HexCube grid;
                 if (GetGrid(grid, PointType(x, y)))
                 {
@@ -108,6 +95,31 @@ public:
     const LayoutType& GetLayout() const { return m_layout; }
     const PointType& GetStart() const { return m_start; }
     const PointType& GetEnd() const { return m_end; }
+
+private:
+    std::vector<T> GetSnaps(T min, T max, T grid) const
+    {
+        T snapMin = HexMath::SnapUp(min, grid);
+        T snapMax = HexMath::SnapDown(max, grid);
+
+        std::vector<T> snaps;
+        snaps.reserve(HexMath::Ceil((max - min) / grid) + 1);
+
+        if (HexMath::NearlyEquals(min, snapMin) == false)
+            snaps.push_back(min);
+
+        int count = HexMath::Round((snapMax - snapMin) / grid);
+        for (int i = 0; i <= count; ++i)
+        {
+            T t = snapMin + (i * grid);
+            snaps.push_back(t);
+        }
+
+        if (HexMath::NearlyEquals(max, snapMax) == false)
+            snaps.push_back(max);
+
+        return snaps;
+    }
 
 private:
     LayoutType m_layout;

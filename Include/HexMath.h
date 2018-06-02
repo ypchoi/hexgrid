@@ -66,4 +66,11 @@ public:
     {
         return Ceil(value / grid) * grid;
     }
+
+    template<typename T>
+    static bool NearlyEquals(const T lhs, const T rhs, const T epsilon = 0.000001f)
+    {
+        T diff = Abs(rhs - lhs);
+        return (diff <= epsilon);
+    }
 };
